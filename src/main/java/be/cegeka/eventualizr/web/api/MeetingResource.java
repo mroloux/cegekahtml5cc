@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import be.cegeka.eventualizr.application.MeetingService;
-import be.cegeka.eventualizr.domain.Meeting;
+import be.cegeka.eventualizr.application.to.MeetingTO;
 
 @Component
 @Path("/meetings")
@@ -25,23 +25,23 @@ public class MeetingResource {
 	private MeetingService meetingService;
 	
 	@GET 
-	public List<Meeting> findAll(){
-		return meetingService.findAll();
+	public List<MeetingTO> getMeetings(){
+		return meetingService.getMeetings();
 	}
 	
 	@GET @Path("{id : \\d+}")
-	public Meeting findOne(@PathParam("id") Long id){
-		return meetingService.findOne(id);
+	public MeetingTO getMeeting(@PathParam("id") Long id){
+		return meetingService.getMeeting(id);
 	}
 	
 	@POST
-	public Meeting create(Meeting newMeeting){
-		return meetingService.save(newMeeting);
+	public MeetingTO create(MeetingTO newMeeting){
+		return meetingService.create(newMeeting);
 	}
 	
 	@PUT @Path("{id : \\d+}")
-	public Meeting update(Meeting meeting){
-		return meetingService.save(meeting);
+	public MeetingTO update(MeetingTO meeting){
+		return meetingService.update(meeting);
 	}
 	
 }

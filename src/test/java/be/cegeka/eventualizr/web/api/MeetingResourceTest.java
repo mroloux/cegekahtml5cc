@@ -1,5 +1,6 @@
 package be.cegeka.eventualizr.web.api;
 
+import static be.cegeka.eventualizr.web.test.infrastructure.CommonAssert.assertMeetingTO;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 import java.util.List;
@@ -14,10 +15,13 @@ import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.request.RequestContextListener;
 
 import be.cegeka.eventualizr.application.MeetingService;
+import be.cegeka.eventualizr.application.mapper.MeetingMapper;
+import be.cegeka.eventualizr.application.to.MeetingTO;
 import be.cegeka.eventualizr.domain.Meeting;
 import be.cegeka.eventualizr.domain.MeetingForTests;
 import be.cegeka.eventualizr.domain.Talk;
 import be.cegeka.eventualizr.domain.TalkForTests;
+import be.cegeka.eventualizr.web.test.infrastructure.DBSeeder;
 import be.cegeka.eventualizr.web.test.infrastructure.JsonHelper;
 import be.cegeka.eventualizr.web.test.infrastructure.SpringAwareGrizzlyWebTestContainerFactory;
 
@@ -34,6 +38,10 @@ public class MeetingResourceTest extends JerseyTest {
 
 	@Autowired
 	private MeetingService meetingService;
+	@Autowired
+	private MeetingMapper meetingMapper;
+	@Autowired
+	private DBSeeder dbSeeder;
 	private Meeting meeting1;
 	private Talk talk1;
 	private Talk talk2;
@@ -67,60 +75,63 @@ public class MeetingResourceTest extends JerseyTest {
 	
 	@Test
 	public void shouldBeAbleToCreateNewMeeting() throws Exception {
+		MeetingTO meetingTO = meetingMapper.toTO(meeting1);
 		
 		WebResource webResource = resource();
 		
-		String createdMeetingJson = webResource.path("meetings").entity(JsonHelper.asJson(meeting1), MediaType.APPLICATION_JSON).post(String.class);
+		String createdMeetingJson = webResource.path("meetings").entity(JsonHelper.asJson(meetingTO), MediaType.APPLICATION_JSON).post(String.class);
 		
-		Meeting createdMeeting = JsonHelper.fromJson(createdMeetingJson, Meeting.class);
+		MeetingTO createdMeeting = JsonHelper.fromJson(createdMeetingJson, MeetingTO.class);
 		
-		assertThat(createdMeeting).isLenientEqualsToByIgnoringFields(meeting1, "id", "talks");
+		assertThat(createdMeeting).isLenientEqualsToByIgnoringFields(meetingTO, "id");
 		assertThat(createdMeeting.getId()).isNotNull().isGreaterThan(0L);
-		assertThat(createdMeeting.getTalks()).hasSize(2);
-		assertThat(createdMeeting.getTalks().get(0).getId()).isNotNull().isGreaterThan(0L);
-		assertThat(createdMeeting.getTalks().get(1).getId()).isNotNull().isGreaterThan(0L);
 	}
 	
 	@Test
 	public void shouldBeAbleToUpdateMeeting() throws Exception {
-		Meeting meeting = meetingService.save(meeting1);
-		meeting.setTitle("new title");
+		dbSeeder.seedDataTransactional(meeting1);
+		MeetingTO meetingTO = meetingMapper.toTO(meeting1);
+		meetingTO.setTitle("new title");
 		
 		WebResource webResource = resource();
 		
-		String updatedMeetingJson = webResource.path("meetings/" + meeting.getId().intValue()).entity(JsonHelper.asJson(meeting), MediaType.APPLICATION_JSON).put(String.class);
+		String updatedMeetingJson = webResource.path("meetings/" + meeting1.getId().intValue()).entity(JsonHelper.asJson(meetingTO), MediaType.APPLICATION_JSON).put(String.class);
 		
-		Meeting updatedMeeting = JsonHelper.fromJson(updatedMeetingJson, Meeting.class);
+		MeetingTO updatedMeetingTO = JsonHelper.fromJson(updatedMeetingJson, MeetingTO.class);
 		
-		assertThat(updatedMeeting.getTitle()).isEqualTo(meeting.getTitle());
+		assertThat(updatedMeetingTO.getTitle()).isEqualTo(meetingTO.getTitle());
 	}
 	
 	@Test
-	public void shouldBeAbleToFindAll() throws Exception {
+	public void shouldBeAbleToGetMeetings() throws Exception {
 		Meeting meeting2 = MeetingForTests.withDefaults(new LocalDateTime(2013, 01, 21, 20, 00), new LocalDateTime(2013, 01, 21, 22, 00));
-		Talk talk3 = TalkForTests.withDefaults(new LocalDateTime(2013, 01, 21, 20, 00), new LocalDateTime(2013, 01, 21, 22, 00));
-		meeting2.addTalk(talk3);
 		
-		meetingService.save(meeting1);
-		meetingService.save(meeting2);
+		dbSeeder.seedDataTransactional(meeting1, meeting2);
 		
 		WebResource webResource = resource();
 		
-		TypeReference<List<Meeting>> typeReference = new TypeReference<List<Meeting>>(){};
+		TypeReference<List<MeetingTO>> typeReference = new TypeReference<List<MeetingTO>>(){};
 		
 		String meetingsJson = webResource.path("meetings").accept(MediaType.APPLICATION_JSON).get(String.class);
-		List<Meeting> meetings = JsonHelper.fromJson(meetingsJson, typeReference);
+		List<MeetingTO> meetings = JsonHelper.fromJson(meetingsJson, typeReference);
 		
-		assertThat(meetings).containsOnly(meeting1, meeting2);
+		assertThat(meetings).hasSize(2);
 		
-		assertThat(meetings.get(0)).isEqualsToByComparingFields(meeting1);
-		assertThat(meetings.get(0).getTalks()).containsOnly(talk1, talk2);
-		assertThat(meetings.get(0).getTalks().get(0)).isEqualsToByComparingFields(talk1);
-		assertThat(meetings.get(0).getTalks().get(1)).isEqualsToByComparingFields(talk2);
+		assertMeetingTO(meetings.get(0), meeting1);
+		assertMeetingTO(meetings.get(1), meeting2);
 		
-		assertThat(meetings.get(1)).isEqualsToByComparingFields(meeting2);
-		assertThat(meetings.get(1).getTalks()).containsOnly(talk3);
-		assertThat(meetings.get(1).getTalks().get(0)).isEqualsToByComparingFields(talk3);
+	}
+	
+	@Test
+	public void shouldBeAbleToGetMeeting() throws Exception {
+		dbSeeder.seedDataTransactional(meeting1);
 		
+		WebResource webResource = resource();
+		
+		String meetingsJson = webResource.path("meetings/" + meeting1.getId().intValue()).accept(MediaType.APPLICATION_JSON).get(String.class);
+		MeetingTO meetingTO = JsonHelper.fromJson(meetingsJson, MeetingTO.class);
+		
+		
+		assertMeetingTO(meetingTO, meeting1);
 	}
 }

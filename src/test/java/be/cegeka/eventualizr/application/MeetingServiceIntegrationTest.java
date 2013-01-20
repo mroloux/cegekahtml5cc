@@ -1,5 +1,6 @@
 package be.cegeka.eventualizr.application;
 
+import static be.cegeka.eventualizr.web.test.infrastructure.CommonAssert.assertMeetingTO;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 import java.util.List;
@@ -13,17 +14,17 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
+import be.cegeka.eventualizr.application.to.MeetingTO;
 import be.cegeka.eventualizr.domain.Meeting;
 import be.cegeka.eventualizr.domain.MeetingForTests;
+import be.cegeka.eventualizr.domain.MeetingRepository;
 import be.cegeka.eventualizr.domain.Talk;
 import be.cegeka.eventualizr.domain.TalkForTests;
 import be.cegeka.eventualizr.web.test.infrastructure.DBSeeder;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration({
-    "classpath:application-context.xml",
-    "classpath:datasource-test-context.xml"
-})
+@ContextConfiguration({ "classpath:application-context.xml",
+		"classpath:datasource-test-context.xml" })
 @Transactional
 public class MeetingServiceIntegrationTest {
 
@@ -31,61 +32,85 @@ public class MeetingServiceIntegrationTest {
 	private DBSeeder dbSeeder;
 	@Autowired
 	private MeetingService meetingService;
-	
+	@Autowired
+	private MeetingRepository meetingRepository;
+
 	private Meeting expectedMeeting1;
 	private Meeting expectedMeeting2;
 	private Talk talk1;
 	private Talk talk2;
-	
+	private LocalDateTime start;
+	private LocalDateTime end;
+
 	@Before
 	public void setUp() throws Exception {
-		expectedMeeting1 = MeetingForTests.withDefaults(new LocalDateTime(2013, 1, 30, 16, 0), new LocalDateTime(2013, 1, 30, 20, 0));
-		expectedMeeting2 = MeetingForTests.withDefaults(new LocalDateTime(2013, 1, 30, 13, 0), new LocalDateTime(2013, 1, 30, 14, 0));
-		
-		talk1 = TalkForTests.withDefaults(new LocalDateTime(2013, 1, 30, 16, 0), new LocalDateTime(2013, 1, 30, 18, 0));
-		talk2 = TalkForTests.withDefaults(new LocalDateTime(2013, 1, 30, 18, 0), new LocalDateTime(2013, 1, 30, 20, 0));
-		
+		start = new LocalDateTime(2013,
+				1, 30, 16, 0);
+		end = new LocalDateTime(2013, 1, 30, 20, 0);
+		expectedMeeting1 = MeetingForTests.withDefaults(start, end);
+		expectedMeeting2 = MeetingForTests.withDefaults(new LocalDateTime(2013,
+				1, 30, 13, 0), new LocalDateTime(2013, 1, 30, 14, 0));
+
+		talk1 = TalkForTests.withDefaults(
+				new LocalDateTime(2013, 1, 30, 16, 0), new LocalDateTime(2013,
+						1, 30, 18, 0));
+		talk2 = TalkForTests.withDefaults(
+				new LocalDateTime(2013, 1, 30, 18, 0), end);
+
 		expectedMeeting1.addTalk(talk1);
 		expectedMeeting1.addTalk(talk2);
-		
+
 		dbSeeder.seedData(expectedMeeting1);
 	}
 
 	@Test
-	public void shouldBeAbleToFindOne() {
-		Meeting actualMeeting = meetingService.findOne(expectedMeeting1.getId());
-		
-		assertMeeting1(actualMeeting);
+	public void shouldBeAbleToGetMeeting() {
+		MeetingTO actualMeeting = meetingService
+				.getMeeting(expectedMeeting1.getId());
+
+		assertMeetingTO(actualMeeting, expectedMeeting1);
 	}
 
-	
 	@Test
-	public void shouldBeAbleToFindAll() {
+	public void shouldBeAbleToGetMeetings() {
 		dbSeeder.seedData(expectedMeeting2);
-		List<Meeting> actualMeetings = meetingService.findAll();
+		List<MeetingTO> meetings = meetingService.getMeetings();
 		
-		assertThat(actualMeetings).containsOnly(expectedMeeting1, expectedMeeting2);
-		assertMeeting1(actualMeetings.get(0));
+		assertThat(meetings).hasSize(2);
+		assertMeetingTO(meetings.get(0), expectedMeeting1);
+		assertMeetingTO(meetings.get(1), expectedMeeting2);
+	}
+
+	@Test
+	public void shouldBeAbleToUpdateMeeting() {
+		MeetingTO meetingTO = meetingService
+				.getMeeting(expectedMeeting1.getId());
+		String newTitle = "new Title";
+		meetingTO.setTitle(newTitle);
 		
-		assertThat(actualMeetings.get(1)).isLenientEqualsToByIgnoringFields(expectedMeeting2, "talks");
-		assertThat(actualMeetings.get(1).getTalks()).isEmpty();
+		MeetingTO actualMeetingTO = meetingService.update(meetingTO);
+
+		assertThat(actualMeetingTO).isEqualsToByComparingFields(meetingTO);
 		
+		Meeting meeting = meetingRepository.findOne(actualMeetingTO.getId());
+		assertThat(meeting.getTitle()).isEqualTo(newTitle);
 	}
 	
 	@Test
-	public void shouldBeAbleToSave(){
-		Meeting actualMeeting = meetingService.save(expectedMeeting1);
+	public void shouldBeAbleToCreateMeeting() {
+		MeetingTO meetingTO = new MeetingTO();
+		meetingTO.setTitle("title");
+		meetingTO.setVenue("venue");
+		meetingTO.setEnd(end.plusMonths(2));
+		meetingTO.setStart(start.plusMonths(2));
 		
-		assertThat(actualMeeting.getId()).isNotNull().isGreaterThan(0);
-		assertThat(actualMeeting.getTalks().get(0).getId()).isNotNull().isGreaterThan(0);
-		assertThat(actualMeeting.getTalks().get(1).getId()).isNotNull().isGreaterThan(0);
-	}
-	
-	private void assertMeeting1(Meeting actualMeeting) {
-		assertThat(actualMeeting).isLenientEqualsToByIgnoringFields(expectedMeeting1, "talks");
-		assertThat(actualMeeting.getTalks()).containsOnly(talk1, talk2);
-		assertThat(actualMeeting.getTalks().get(0)).isEqualsToByComparingFields(talk1);
-		assertThat(actualMeeting.getTalks().get(1)).isEqualsToByComparingFields(talk2);
+		MeetingTO actualMeetingTO = meetingService.create(meetingTO);
+		
+		assertThat(actualMeetingTO).isLenientEqualsToByIgnoringFields(meetingTO, "id");
+		assertThat(actualMeetingTO.getId()).isNotNull().isGreaterThan(0L);
+		
+		Meeting meeting = meetingRepository.findOne(actualMeetingTO.getId());
+		assertThat(meeting).isNotNull();
 	}
 
 }

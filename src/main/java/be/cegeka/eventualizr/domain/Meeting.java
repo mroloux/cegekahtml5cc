@@ -11,19 +11,13 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
 
 import com.google.common.collect.Lists;
 
-
 @Entity
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.FIELD)
 public class Meeting extends AbstractEntity {
 
 	@NotNull
