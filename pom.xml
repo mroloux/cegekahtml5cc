@@ -2,10 +2,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>be.cegeka.eventualizr</groupId>
-	<artifactId>Eventualizr</artifactId>
+	<artifactId>eventualizr-jaxrs</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>Eventualizr</name>
+	<name>Eventualizr jaxrs</name>
 	<properties>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -460,7 +460,16 @@
 						</dependency>
 					</dependencies>
 				</plugin>
-
+				<plugin>
+					<artifactId>maven-war-plugin</artifactId>
+					<version>2.2</version>
+					<extensions>false</extensions>
+					<configuration>
+						<!-- <warSourceDirectory>${basedir}/src/main/webapp-build</warSourceDirectory> -->
+						<failOnMissingWebXml>false</failOnMissingWebXml>
+						<warName>eventualizr</warName>
+					</configuration>
+				</plugin>
 				<plugin>
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>2.3.2</version>

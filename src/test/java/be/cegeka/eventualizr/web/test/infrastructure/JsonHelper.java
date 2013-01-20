@@ -21,8 +21,9 @@ public class JsonHelper {
         return MAPPER.readValue(json, klass);
     }
     
-    public static <T> T fromJson(String json, TypeReference<T> reference) throws IOException {
-        return MAPPER.readValue(json, reference);
+    @SuppressWarnings("unchecked")
+	public static <T> T fromJson(String json, TypeReference<T> reference) throws IOException {
+        return (T) MAPPER.readValue(json, reference);
     }
 
 }
