@@ -39,6 +39,9 @@ public class MeetingResource {
 		return meetingService.create(newMeeting);
 	}
 	
+	/*
+	 * create resources with put not supported (client has to provide the unique id)
+	 */
 	@PUT @Path("{id : \\d+}")
 	public MeetingTO update(MeetingTO meeting){
 		return meetingService.update(meeting);
