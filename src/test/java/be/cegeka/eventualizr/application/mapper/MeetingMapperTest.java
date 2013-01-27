@@ -7,6 +7,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import be.cegeka.eventualizr.application.to.MeetingTO;
+import be.cegeka.eventualizr.application.to.TalkTO;
 import be.cegeka.eventualizr.domain.Meeting;
 import be.cegeka.eventualizr.domain.MeetingForTests;
 import be.cegeka.eventualizr.domain.Talk;
@@ -52,7 +53,7 @@ public class MeetingMapperTest {
 	}
 
 	@Test
-	public void canMapToTO() {
+	public void canMapToMeetingTO() {
 		MeetingTO to = mapper.toTO(meeting);
 
 		assertThat(to.getId()).isEqualTo(meeting.getId());
@@ -60,6 +61,20 @@ public class MeetingMapperTest {
 		assertThat(to.getStart()).isEqualTo(meeting.getStart());
 		assertThat(to.getTitle()).isEqualTo(meeting.getTitle());
 		assertThat(to.getVenue()).isEqualTo(meeting.getVenue());
+	}
+	
+	@Test
+	public void canMapToTalkTO() {
+		TalkTO to = mapper.toTO(talk);
+		
+		assertThat(to.getId()).isEqualTo(talk.getId());
+		assertThat(to.getFrom()).isEqualTo(talk.getFrom());
+		assertThat(to.getLocation()).isEqualTo(talk.getLocation());
+		assertThat(to.getObjective()).isEqualTo(talk.getObjective());
+		assertThat(to.getSpeaker()).isEqualTo(talk.getSpeaker());
+		assertThat(to.getSubject()).isEqualTo(talk.getSubject());
+		assertThat(to.getSummary()).isEqualTo(talk.getSummary());
+		assertThat(to.getTill()).isEqualTo(talk.getTill());
 	}
 	
 	@Test

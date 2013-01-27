@@ -2,15 +2,20 @@ package be.cegeka.eventualizr.application;
 
 import java.util.List;
 
+import javax.annotation.Nullable;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import be.cegeka.eventualizr.application.mapper.MeetingMapper;
 import be.cegeka.eventualizr.application.to.MeetingTO;
+import be.cegeka.eventualizr.application.to.TalkTO;
 import be.cegeka.eventualizr.domain.Meeting;
 import be.cegeka.eventualizr.domain.MeetingRepository;
+import be.cegeka.eventualizr.domain.Talk;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Lists;
 
 
@@ -29,13 +34,33 @@ public class MeetingService {
 	}
 	
 	@Transactional(readOnly=true)
-	public List<MeetingTO> getMeetings() {
-		List<MeetingTO> meetingTOs = Lists.newArrayList();
-		for (Meeting meeting : meetingRepository.findAll()) {
-			meetingTOs.add(meetingMapper.toTO(meeting));
-		}
-		return meetingTOs;
+	public TalkTO getTalk(Long meetingId, Long talkId) {
+		Meeting meeting = meetingRepository.findOne(meetingId);
+		Talk talk = meeting.getTalk(talkId);
+		return meetingMapper.toTO(talk);
 	}
+	
+	@Transactional(readOnly=true)
+	public List<TalkTO> getTalks(Long meetingId) {
+		Meeting meeting = meetingRepository.findOne(meetingId);
+		return Lists.transform(meeting.getTalks(), new Function<Talk, TalkTO>(){
+			@Override
+			public TalkTO apply(@Nullable Talk talk) {
+				return meetingMapper.toTO(talk);
+			}
+			
+		});
+	}
+	
+	@Transactional(readOnly=true)
+	public List<MeetingTO> getMeetings() {
+		return  Lists.transform(meetingRepository.findAll(), new Function<Meeting, MeetingTO>(){
+			@Override
+			public MeetingTO apply(@Nullable Meeting meeting) {
+				return meetingMapper.toTO(meeting);
+			}
+		});
+	};
 	
 	public MeetingTO update(MeetingTO meetingTO){
 		Meeting meeting = meetingRepository.findOne(meetingTO.getId());

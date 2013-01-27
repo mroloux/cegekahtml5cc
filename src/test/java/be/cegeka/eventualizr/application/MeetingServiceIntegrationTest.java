@@ -1,6 +1,7 @@
 package be.cegeka.eventualizr.application;
 
 import static be.cegeka.eventualizr.web.test.infrastructure.CommonAssert.assertMeetingTO;
+import static be.cegeka.eventualizr.web.test.infrastructure.CommonAssert.assertTalkTO;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 import java.util.List;
@@ -15,6 +16,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 
 import be.cegeka.eventualizr.application.to.MeetingTO;
+import be.cegeka.eventualizr.application.to.TalkTO;
 import be.cegeka.eventualizr.domain.Meeting;
 import be.cegeka.eventualizr.domain.MeetingForTests;
 import be.cegeka.eventualizr.domain.MeetingRepository;
@@ -80,6 +82,23 @@ public class MeetingServiceIntegrationTest {
 		assertMeetingTO(meetings.get(0), expectedMeeting1);
 		assertMeetingTO(meetings.get(1), expectedMeeting2);
 	}
+	
+	@Test
+	public void shouldBeAbleToGetTalk() {
+		TalkTO talk = meetingService.getTalk(expectedMeeting1.getId(), talk1.getId());
+		
+		assertTalkTO(talk, talk1);
+	}
+	
+	@Test
+	public void shouldBeAbleToTalks() {
+		List<TalkTO> talks = meetingService.getTalks(expectedMeeting1.getId());
+		
+		assertThat(talks).hasSize(2);
+		assertTalkTO(talks.get(0), talk1);
+		assertTalkTO(talks.get(1), talk2);
+	}
+
 
 	@Test
 	public void shouldBeAbleToUpdateMeeting() {

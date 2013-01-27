@@ -79,5 +79,14 @@ public class Meeting extends AbstractEntity {
 	public void addTalk(Talk talk) {
 		talks.add(talk);
 	}
+
+	public Talk getTalk(Long talkId) {
+		for (Talk talk : talks) {
+			if(talkId.equals(talk.getId())){
+				return talk;
+			}
+		}
+		return null;
+	}
 	
 }
