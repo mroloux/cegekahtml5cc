@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import be.cegeka.eventualizr.application.MeetingService;
 import be.cegeka.eventualizr.application.to.MeetingTO;
+import be.cegeka.eventualizr.application.to.TalkTO;
 
 @Component
 @Path("/meetings")
@@ -45,6 +46,26 @@ public class MeetingResource {
 	@PUT @Path("{id : \\d+}")
 	public MeetingTO update(MeetingTO meeting){
 		return meetingService.update(meeting);
+	}
+	
+	@GET @Path("{id : \\d+}/talks")
+	public List<TalkTO> getTalks(@PathParam("id") Long meetingId){
+		return meetingService.getTalks(meetingId);
+	}
+	
+	@GET @Path("{id : \\d+}/talks/{talkId : \\d+}")
+	public TalkTO getTalk(@PathParam("id") Long meetingId, @PathParam("talkId") Long talkId){
+		return meetingService.getTalk(meetingId, talkId);
+	}
+	
+	@PUT @Path("{id : \\d+}/talks/{talkId : \\d+}")
+	public TalkTO updateTalk(@PathParam("id") Long meetingId, TalkTO talkTO){
+		return meetingService.update(meetingId, talkTO);
+	}
+	
+	@POST  @Path("{id : \\d+}/talks")
+	public TalkTO createTalk(@PathParam("id") Long meetingId, TalkTO newTalkTO){
+		return meetingService.create(meetingId, newTalkTO);
 	}
 	
 }

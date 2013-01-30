@@ -116,6 +116,21 @@ public class MeetingServiceIntegrationTest {
 	}
 	
 	@Test
+	public void shouldBeAbleToUpdateTalk() {
+		TalkTO talkTO = meetingService
+				.getTalk(expectedMeeting1.getId(), talk1.getId());
+		String newSubject = "new Subject";
+		talkTO.setSubject(newSubject);
+		
+		TalkTO actualTalkTO = meetingService.update(expectedMeeting1.getId(), talkTO);
+
+		assertThat(actualTalkTO).isEqualsToByComparingFields(talkTO);
+		
+		Meeting meeting = meetingRepository.findOne(expectedMeeting1.getId());
+		assertThat(meeting.getTalk(actualTalkTO.getId()).getSubject()).isEqualTo(newSubject);
+	}
+	
+	@Test
 	public void shouldBeAbleToCreateMeeting() {
 		MeetingTO meetingTO = new MeetingTO();
 		meetingTO.setTitle("title");
@@ -130,6 +145,31 @@ public class MeetingServiceIntegrationTest {
 		
 		Meeting meeting = meetingRepository.findOne(actualMeetingTO.getId());
 		assertThat(meeting).isNotNull();
+	}
+	
+	@Test
+	public void shouldBeAbleToCreateTalk() {
+		TalkTO talkTO = createTalkTO();
+		
+		TalkTO actualTalkTO = meetingService.create(expectedMeeting1.getId(), talkTO);
+		
+		assertThat(actualTalkTO).isLenientEqualsToByIgnoringFields(talkTO, "id");
+		assertThat(actualTalkTO.getId()).isNotNull().isGreaterThan(0L);
+		
+		Meeting meeting = meetingRepository.findOne(expectedMeeting1.getId());
+		assertThat(meeting.getTalk(actualTalkTO.getId())).isNotNull();
+	}
+	
+	private TalkTO createTalkTO() {
+		TalkTO talkTO = new TalkTO();
+		talkTO.setFrom(start.plusDays(10));
+		talkTO.setLocation("TO location");
+		talkTO.setObjective("TO objective");
+		talkTO.setSpeaker("TO speaker");
+		talkTO.setSubject("TO subject");
+		talkTO.setSummary("TO summary");
+		talkTO.setTill(end.plusDays(15));
+		return talkTO;
 	}
 
 }

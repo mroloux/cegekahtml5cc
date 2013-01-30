@@ -49,4 +49,29 @@ public class MeetingMapper {
 		return to;
 	}
 
+	public Talk toEntity(TalkTO talkTO) {
+		Talk entity = new Talk();
+		entity.setFrom(talkTO.getFrom());
+		entity.setLocation(talkTO.getLocation());
+		entity.setObjective(talkTO.getObjective());
+		entity.setSpeaker(talkTO.getSpeaker());
+		entity.setSubject(talkTO.getSubject());
+		entity.setSummary(talkTO.getSummary());
+		entity.setTill(talkTO.getTill());
+		entity.setFrom(talkTO.getFrom());
+		entity.setFrom(talkTO.getFrom());
+		return entity;
+	}
+
+	public void mergeEntity(Talk talk, TalkTO talkTO) {
+		talk.setFrom(talkTO.getFrom());
+		talk.setLocation(talkTO.getLocation());
+		talk.setObjective(talkTO.getObjective());
+		talk.setSpeaker(talkTO.getSpeaker());
+		talk.setSubject(talkTO.getSubject());
+		talk.setSummary(talkTO.getSummary());
+		talk.setTill(talkTO.getTill());
+		
+	}
+	
 }

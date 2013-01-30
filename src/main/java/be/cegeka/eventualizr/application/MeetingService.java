@@ -34,6 +34,27 @@ public class MeetingService {
 	}
 	
 	@Transactional(readOnly=true)
+	public List<MeetingTO> getMeetings() {
+		return  Lists.transform(meetingRepository.findAll(), new Function<Meeting, MeetingTO>(){
+			@Override
+			public MeetingTO apply(Meeting meeting) {
+				return meetingMapper.toTO(meeting);
+			}
+		});
+	};
+	
+	public MeetingTO update(MeetingTO meetingTO){
+		Meeting meeting = meetingRepository.findOne(meetingTO.getId());
+		meetingMapper.mergeEntity(meeting, meetingTO);
+		return meetingMapper.toTO(meetingRepository.save(meeting));
+	}
+	
+	public MeetingTO create(MeetingTO meetingTO){
+		Meeting meeting = meetingMapper.toEntity(meetingTO);
+		return meetingMapper.toTO(meetingRepository.save(meeting));
+	}
+	
+	@Transactional(readOnly=true)
 	public TalkTO getTalk(Long meetingId, Long talkId) {
 		Meeting meeting = meetingRepository.findOne(meetingId);
 		Talk talk = meeting.getTalk(talkId);
@@ -52,25 +73,24 @@ public class MeetingService {
 		});
 	}
 	
-	@Transactional(readOnly=true)
-	public List<MeetingTO> getMeetings() {
-		return  Lists.transform(meetingRepository.findAll(), new Function<Meeting, MeetingTO>(){
-			@Override
-			public MeetingTO apply(@Nullable Meeting meeting) {
-				return meetingMapper.toTO(meeting);
-			}
-		});
-	};
-	
-	public MeetingTO update(MeetingTO meetingTO){
-		Meeting meeting = meetingRepository.findOne(meetingTO.getId());
-		meetingMapper.mergeEntity(meeting, meetingTO);
-		return meetingMapper.toTO(meetingRepository.save(meeting));
+	public TalkTO update(Long meetingId, TalkTO talkTO){
+		Meeting meeting = meetingRepository.findOne(meetingId);
+		Talk talk = meeting.getTalk(talkTO.getId());
+		meetingMapper.mergeEntity(talk, talkTO);
+		meetingRepository.save(meeting);
+		return meetingMapper.toTO(talk);
 	}
 	
-	public MeetingTO create(MeetingTO meetingTO){
-		Meeting meeting = meetingMapper.toEntity(meetingTO);
-		return meetingMapper.toTO(meetingRepository.save(meeting));
+	public TalkTO create(Long meetingId, TalkTO talkTO){
+		Meeting meeting = meetingRepository.findOne(meetingId);
+		meeting.addTalk(meetingMapper.toEntity(talkTO));
+		meetingRepository.save(meeting);
+		List<Talk> talks = meeting.getTalks();
+		return meetingMapper.toTO(getLastTask(talks));
+	}
+
+	private Talk getLastTask(List<Talk> talks) {
+		return talks.get(talks.size() - 1);
 	}
 
 }
