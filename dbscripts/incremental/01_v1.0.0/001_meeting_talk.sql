@@ -1,4 +1,4 @@
-CREATE  TABLE IF NOT EXISTS `eventualizr`.`Meeting` (
+CREATE  TABLE IF NOT EXISTS `Meeting` (
   `id` BIGINT NOT NULL AUTO_INCREMENT ,
   `venue` VARCHAR(64) NOT NULL ,
   `title` VARCHAR(128) NOT NULL ,
@@ -8,7 +8,7 @@ CREATE  TABLE IF NOT EXISTS `eventualizr`.`Meeting` (
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
-CREATE  TABLE IF NOT EXISTS `eventualizr`.`Talk` (
+CREATE  TABLE IF NOT EXISTS `Talk` (
   `id` BIGINT NOT NULL AUTO_INCREMENT ,
   `speaker` VARCHAR(64) NOT NULL ,
   `subject` VARCHAR(128) NOT NULL ,
@@ -22,7 +22,7 @@ CREATE  TABLE IF NOT EXISTS `eventualizr`.`Talk` (
   INDEX `fk_Talk_Meeting_idx` (`Meeting_id` ASC) ,
   CONSTRAINT `fk_Talk_Meeting`
     FOREIGN KEY (`Meeting_id` )
-    REFERENCES `eventualizr`.`Meeting` (`id` )
+    REFERENCES `Meeting` (`id` )
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
