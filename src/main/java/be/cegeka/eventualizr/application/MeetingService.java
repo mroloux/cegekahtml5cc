@@ -64,13 +64,11 @@ public class MeetingService {
 	@Transactional(readOnly=true)
 	public List<TalkTO> getTalks(Long meetingId) {
 		Meeting meeting = meetingRepository.findOne(meetingId);
-		return Lists.transform(meeting.getTalks(), new Function<Talk, TalkTO>(){
-			@Override
-			public TalkTO apply(@Nullable Talk talk) {
-				return meetingMapper.toTO(talk);
-			}
-			
-		});
+		List<TalkTO> talkTOs = Lists.newArrayList();
+		for (Talk talk : meeting.getTalks()) {
+			talkTOs.add(meetingMapper.toTO(talk));
+		}
+		return talkTOs;
 	}
 	
 	public TalkTO update(Long meetingId, TalkTO talkTO){

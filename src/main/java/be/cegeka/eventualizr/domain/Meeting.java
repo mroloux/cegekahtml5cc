@@ -36,7 +36,7 @@ public class Meeting extends AbstractEntity {
 	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
 	private LocalDateTime end;
 	
-	@OneToMany(cascade=CascadeType.ALL ,fetch= FetchType.EAGER)
+	@OneToMany(cascade=CascadeType.ALL)
 	@JoinColumn(name="Meeting_id")
 	private List<Talk> talks = Lists.newArrayList();
 

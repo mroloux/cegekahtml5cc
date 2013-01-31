@@ -27,4 +27,8 @@ When a script fails during updateDatabase you can:
 Fix the script, manually perform the changes of the script and call the markErrorScriptPerformed task.
 
     mvn generate-sources -Pdev -Ddb=markErrorScriptPerformed
+    
+###Run app locally
+	mvn package
+    java -jar target/dependency/jetty-runner.jar target/*.war 
 
