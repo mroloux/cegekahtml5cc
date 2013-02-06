@@ -2,10 +2,16 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>be.cegeka.eventualizr</groupId>
-	<artifactId>eventualizr-jaxrs</artifactId>
+	<artifactId>eventualizr</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
-	<name>Eventualizr jaxrs</name>
+	<packaging>pom</packaging>
+	<name>Eventualizr parent</name>
+	<modules>
+		<module>eventualizr-domain</module>
+		<module>eventualizr-application</module>
+		<module>eventualizr-rest</module>
+		<module>eventualizr-web-angular</module>
+	</modules>
 	<properties>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -269,60 +275,6 @@
 		</dependencies>
 	</dependencyManagement>
 	<dependencies>
-		<!-- jersey -->
-		<dependency>
-			<groupId>com.sun.jersey</groupId>
-			<artifactId>jersey-server</artifactId>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.core</groupId>
-			<artifactId>jackson-databind</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.jaxrs</groupId>
-			<artifactId>jackson-jaxrs-json-provider</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.dataformat</groupId>
-			<artifactId>jackson-dataformat-yaml</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.datatype</groupId>
-			<artifactId>jackson-datatype-guava</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.fasterxml.jackson.datatype</groupId>
-			<artifactId>jackson-datatype-joda</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.jersey.contribs</groupId>
-			<artifactId>jersey-spring</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>com.sun.jersey.jersey-test-framework</groupId>
-			<artifactId>jersey-test-framework-grizzly2</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-impl</artifactId>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>javax.ws.rs</groupId>
-			<artifactId>jsr311-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>javax.xml.bind</groupId>
-			<artifactId>jaxb-api</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.samaxes.filter</groupId>
-			<artifactId>cachefilter</artifactId>
-		</dependency>
 		<!-- common -->
 		<dependency>
 			<groupId>org.apache.commons</groupId>
@@ -332,62 +284,11 @@
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
 		</dependency>
-		<!-- Spring & Spring Data JPA -->
-		<dependency>
-			<groupId>org.springframework.data</groupId>
-			<artifactId>spring-data-jpa</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>junit</groupId>
-					<artifactId>junit</artifactId>
-				</exclusion>
-			</exclusions>
-		</dependency>
+		<!-- spring -->
 		<dependency>
 			<groupId>org.springframework</groupId>
-			<artifactId>spring-orm</artifactId>
+			<artifactId>spring-core</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-tx</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-web</artifactId>
-		</dependency>
-
-		<!-- Querydsl -->
-		<dependency>
-			<groupId>com.mysema.querydsl</groupId>
-			<artifactId>querydsl-jpa</artifactId>
-		</dependency>
-
-		<!-- DB -->
-		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate.javax.persistence</groupId>
-			<artifactId>hibernate-jpa-2.0-api</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-entitymanager</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>org.jadira.usertype</groupId>
-			<artifactId>usertype.core</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>commons-dbcp</groupId>
-			<artifactId>commons-dbcp</artifactId>
-		</dependency>
-
 		<!-- logging -->
 		<dependency>
 			<groupId>org.slf4j</groupId>
@@ -445,41 +346,6 @@
 		<pluginManagement>
 			<plugins>
 				<plugin>
-					<groupId>org.dbmaintain</groupId>
-					<artifactId>dbmaintain-maven-plugin</artifactId>
-					<version>2.4</version>
-					<configuration>
-						<databases>
-							<database>
-								<driverClassName>${jdbc.driverClassName}</driverClassName>
-								<userName>${jdbc.username}</userName>
-								<password>${jdbc.password}</password>
-								<url>${jdbc.url}</url>
-								<schemaNames>${jdbc.username}</schemaNames>
-							</database>
-						</databases>
-						<scriptLocations>${basedir}/dbscripts</scriptLocations>
-						<autoCreateDbMaintainScriptsTable>true</autoCreateDbMaintainScriptsTable>
-					</configuration>
-					<dependencies>
-						<dependency>
-							<groupId>mysql</groupId>
-							<artifactId>mysql-connector-java</artifactId>
-							<version>${mysql.version}</version>
-						</dependency>
-					</dependencies>
-				</plugin>
-				<plugin>
-					<artifactId>maven-war-plugin</artifactId>
-					<version>2.2</version>
-					<extensions>false</extensions>
-					<configuration>
-						<!-- <warSourceDirectory>${basedir}/src/main/webapp-build</warSourceDirectory> -->
-						<failOnMissingWebXml>false</failOnMissingWebXml>
-						<warName>eventualizr</warName>
-					</configuration>
-				</plugin>
-				<plugin>
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>2.3.2</version>
 					<configuration>
@@ -488,6 +354,17 @@
 						<encoding>UTF-8</encoding>
 					</configuration>
 				</plugin>
+				<plugin>
+					<artifactId>maven-jar-plugin</artifactId>
+					<version>2.4</version>
+					<executions>
+						<execution>
+							<goals>
+								<goal>test-jar</goal>
+							</goals>
+						</execution>
+					</executions>
+				</plugin>
 			</plugins>
 		</pluginManagement>
 		<plugins>
@@ -495,256 +372,17 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 			</plugin>
 			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<version>2.3</version>
-				<executions>
-					<execution>
-						<phase>package</phase>
-						<goals>
-							<goal>copy</goal>
-						</goals>
-						<configuration>
-							<artifactItems>
-								<artifactItem>
-									<groupId>org.mortbay.jetty</groupId>
-									<artifactId>jetty-runner</artifactId>
-									<version>7.4.5.v20110725</version>
-									<destFileName>jetty-runner.jar</destFileName>
-								</artifactItem>
-							</artifactItems>
-						</configuration>
-					</execution>
-				</executions>
+				<artifactId>maven-jar-plugin</artifactId>
+			</plugin>
+			<plugin>
+				<artifactId>maven-war-plugin</artifactId>
+				<version>2.2</version>
+				<extensions>false</extensions>
+				<configuration>
+					<failOnMissingWebXml>false</failOnMissingWebXml>
+					<warName>eventualizr-angular</warName>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
-	<profiles>
-		<profile>
-			<id>dev</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<build>
-				<resources>
-					<resource>
-						<directory>src/main/resources</directory>
-					</resource>
-					<resource>
-						<directory>src/main/dev-resources</directory>
-					</resource>
-				</resources>
-				<plugins>
-					<plugin>
-						<artifactId>maven-compiler-plugin</artifactId>
-					</plugin>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>properties-maven-plugin</artifactId>
-						<version>1.0-alpha-2</version>
-						<executions>
-							<execution>
-								<phase>initialize</phase>
-								<goals>
-									<goal>read-project-properties</goal>
-								</goals>
-								<configuration>
-									<files>
-										<file>src/main/dev-resources/META-INF/eventualizr-config.properties</file>
-										<file>src/main/dev-resources/META-INF/jdbc.properties</file>
-									</files>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>prod</id>
-			<activation>
-				<property>
-					<name>environment</name>
-					<value>prod</value>
-				</property>
-			</activation>
-			<build>
-				<resources>
-					<resource>
-						<directory>src/main/resources</directory>
-					</resource>
-					<resource>
-						<directory>src/main/prod-resources</directory>
-					</resource>
-				</resources>
-
-				<plugins>
-					<plugin>
-						<artifactId>maven-compiler-plugin</artifactId>
-					</plugin>
-					<!-- <plugin> <groupId>org.dbmaintain</groupId> <artifactId>dbmaintain-maven-plugin</artifactId> 
-						<executions> <execution> <phase>install</phase> <goals> <goal>updateDatabase</goal> 
-						</goals> </execution> </executions> </plugin> -->
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>properties-maven-plugin</artifactId>
-						<version>1.0-alpha-2</version>
-						<executions>
-							<execution>
-								<phase>initialize</phase>
-								<goals>
-									<goal>read-project-properties</goal>
-								</goals>
-								<configuration>
-									<files>
-										<file>src/main/prod-resources/META-INF/eventualizr-config.properties</file>
-										<file>src/main/prod-resources/META-INF/jdbc.properties</file>
-									</files>
-								</configuration>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>updateDatabase</id>
-			<activation>
-				<property>
-					<name>db</name>
-					<value>updateDatabase</value>
-				</property>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.dbmaintain</groupId>
-						<artifactId>dbmaintain-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<phase>generate-sources</phase>
-								<goals>
-									<goal>updateDatabase</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>markErrorScriptPerformed</id>
-			<activation>
-				<property>
-					<name>db</name>
-					<value>markErrorScriptPerformed</value>
-				</property>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.dbmaintain</groupId>
-						<artifactId>dbmaintain-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<phase>generate-sources</phase>
-								<goals>
-									<goal>markErrorScriptPerformed</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>markErrorScriptReverted</id>
-			<activation>
-				<property>
-					<name>db</name>
-					<value>markErrorScriptReverted</value>
-				</property>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.dbmaintain</groupId>
-						<artifactId>dbmaintain-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<phase>generate-sources</phase>
-								<goals>
-									<goal>markErrorScriptReverted</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>markDatabaseAsUpToDate</id>
-			<activation>
-				<property>
-					<name>db</name>
-					<value>markDatabaseAsUpToDate</value>
-				</property>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.dbmaintain</groupId>
-						<artifactId>dbmaintain-maven-plugin</artifactId>
-						<executions>
-							<execution>
-								<phase>generate-sources</phase>
-								<goals>
-									<goal>markDatabaseAsUpToDate</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-		<profile>
-			<id>clearDatabase</id>
-			<activation>
-				<property>
-					<name>db</name>
-					<value>clearDatabase</value>
-				</property>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.dbmaintain</groupId>
-						<artifactId>dbmaintain-maven-plugin</artifactId>
-						<configuration>
-							<databases>
-								<database>
-									<driverClassName>${jdbc.driverClassName}</driverClassName>
-									<userName>${jdbc.username}</userName>
-									<!-- hardcoded password, prevents clearDatabase on prod db -->
-									<password>eventualizr_007</password>
-									<url>${jdbc.url}</url>
-									<schemaNames>${jdbc.username}</schemaNames>
-								</database>
-							</databases>
-							<scriptLocations>${basedir}/dbscripts</scriptLocations>
-							<autoCreateDbMaintainScriptsTable>true</autoCreateDbMaintainScriptsTable>
-						</configuration>
-						<executions>
-							<execution>
-								<phase>generate-sources</phase>
-								<goals>
-									<goal>clearDatabase</goal>
-								</goals>
-							</execution>
-						</executions>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
-	</profiles>
 </project>

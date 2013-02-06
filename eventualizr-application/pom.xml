@@ -1,0 +1,48 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	
+	<parent>
+		<artifactId>eventualizr</artifactId>
+		<groupId>be.cegeka.eventualizr</groupId>
+		<version>0.0.1-SNAPSHOT</version>
+	</parent>
+	
+	<artifactId>eventualizr-application</artifactId>
+	<packaging>jar</packaging>
+	<name>Eventualizr application</name>
+	
+	<dependencies>
+		<dependency>
+			<groupId>be.cegeka.eventualizr</groupId>
+			<artifactId>eventualizr-domain</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>be.cegeka.eventualizr</groupId>
+			<artifactId>eventualizr-domain</artifactId>
+			<version>${project.version}</version>
+			<scope>test</scope>
+			<type>test-jar</type>
+		</dependency>
+	</dependencies>
+	
+	<repositories>
+		<repository>
+			<id>JBOSS_NEXUS</id>
+			<url>http://repository.jboss.org/nexus/content/groups/public</url>
+		</repository>
+		<repository>
+			<id>MAVEN_CENTRAL</id>
+			<url>http://central.maven.org/maven2/</url>
+		</repository>
+	</repositories>
+	<build>
+		<finalName>${project.artifactId}</finalName>
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>
