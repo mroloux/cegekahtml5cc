@@ -83,6 +83,35 @@
 	</repositories>
 	<build>
 		<finalName>${project.artifactId}</finalName>
+		<pluginManagement>
+			<plugins>
+				<plugin>
+					<groupId>org.dbmaintain</groupId>
+					<artifactId>dbmaintain-maven-plugin</artifactId>
+					<version>2.4</version>
+					<configuration>
+						<databases>
+							<database>
+								<driverClassName>${jdbc.driverClassName}</driverClassName>
+								<userName>${jdbc.username}</userName>
+								<password>${jdbc.password}</password>
+								<url>${jdbc.url}</url>
+								<schemaNames>${jdbc.username}</schemaNames>
+							</database>
+						</databases>
+						<scriptLocations>${basedir}/dbscripts</scriptLocations>
+						<autoCreateDbMaintainScriptsTable>true</autoCreateDbMaintainScriptsTable>
+					</configuration>
+					<dependencies>
+						<dependency>
+							<groupId>mysql</groupId>
+							<artifactId>mysql-connector-java</artifactId>
+							<version>${mysql.version}</version>
+						</dependency>
+					</dependencies>
+				</plugin>
+			</plugins>
+		</pluginManagement>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
