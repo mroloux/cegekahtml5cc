@@ -36,7 +36,7 @@ public class Meeting extends AbstractEntity {
 	private LocalDateTime end;
 	
 	@OneToMany(cascade=CascadeType.ALL)
-	@JoinColumn(name="Meeting_id")
+	@JoinColumn(nullable=false, name="Meeting_id", updatable=false)
 	private List<Talk> talks = Lists.newArrayList();
 
 	public String getVenue() {
@@ -72,7 +72,7 @@ public class Meeting extends AbstractEntity {
 	}
 	
 	public List<Talk> getTalks() {
-		return talks;
+		return Collections.unmodifiableList(talks);
 	}
 
 	public void addTalk(Talk talk) {

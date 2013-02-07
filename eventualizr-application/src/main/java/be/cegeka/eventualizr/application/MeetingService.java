@@ -63,8 +63,7 @@ public class MeetingService {
 	public List<TalkTO> getTalks(Long meetingId) {
 		Meeting meeting = meetingRepository.findOne(meetingId);
 		List<TalkTO> talkTOs = Lists.newArrayList();
-		List<Talk> talks = meeting.getTalks();
-		for (Talk talk : talks) {
+		for (Talk talk : meeting.getTalks()) {
 			talkTOs.add(meetingMapper.toTO(talk));
 		}
 		return talkTOs;
