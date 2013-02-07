@@ -72,7 +72,7 @@ public class Meeting extends AbstractEntity {
 	}
 	
 	public List<Talk> getTalks() {
-		return Collections.unmodifiableList(talks);
+		return talks;
 	}
 
 	public void addTalk(Talk talk) {
