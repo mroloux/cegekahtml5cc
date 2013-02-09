@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:jdbc="http://www.springframework.org/schema/jdbc"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
 	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xsi:schemaLocation="http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc.xsd
 		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -12,6 +10,31 @@
 		http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context-3.1.xsd">
 
-	<jdbc:embedded-database id="dataSource" type="HSQL" />
-	<context:property-placeholder location="classpath:jdbc-test.properties"/>	
+	<context:annotation-config />
+
+	<context:component-scan base-package="be.cegeka.eventualizr.domain" />
+
+	<!-- <jdbc:embedded-database id="dataSource" type="HSQL" /> -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+	<context:property-placeholder location="classpath:jdbc-test.properties" />
+
+	<bean id="updateTask" class="org.dbmaintain.launch.task.UpdateDatabaseTask">
+		<property name="databases">
+			<list>
+				<bean class="org.dbmaintain.launch.task.DbMaintainDatabase">
+					<property name="dialect" value="mysql" />
+					<property name="dataSource" ref="dataSource" />
+					<property name="schemaNames" value="eventualizr_test" />
+				</bean>
+			</list>
+		</property>
+		<property name="scriptLocations" value="../eventualizr-db/dbscripts" />
+		<property name="disableConstraints" value="false" />
+	</bean>
 </beans>

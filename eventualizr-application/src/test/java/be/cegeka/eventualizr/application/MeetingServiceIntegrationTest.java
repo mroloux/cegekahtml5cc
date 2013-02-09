@@ -8,11 +8,13 @@ import java.util.List;
 
 import org.joda.time.LocalDateTime;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.transaction.TransactionConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
 import be.cegeka.eventualizr.application.to.MeetingTO;
@@ -22,16 +24,19 @@ import be.cegeka.eventualizr.domain.MeetingForTests;
 import be.cegeka.eventualizr.domain.MeetingRepository;
 import be.cegeka.eventualizr.domain.Talk;
 import be.cegeka.eventualizr.domain.TalkForTests;
-import be.cegeka.eventualizr.domain.infrastructure.DBSeeder;
+import be.cegeka.eventualizr.domain.infrastructure.DBRule;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration({ "classpath:domain-context.xml", "classpath:application-context.xml",
 		"classpath:datasource-test-context.xml" })
+@TransactionConfiguration(transactionManager="transactionManager", defaultRollback=false)
 @Transactional
 public class MeetingServiceIntegrationTest {
-
+	
+	@Rule
 	@Autowired
-	private DBSeeder dbSeeder;
+	public DBRule dbRule;
+
 	@Autowired
 	private MeetingService meetingService;
 	@Autowired
@@ -43,7 +48,7 @@ public class MeetingServiceIntegrationTest {
 	private Talk talk2;
 	private LocalDateTime start;
 	private LocalDateTime end;
-
+	
 	@Before
 	public void setUp() throws Exception {
 		start = new LocalDateTime(2013,
@@ -62,7 +67,7 @@ public class MeetingServiceIntegrationTest {
 		expectedMeeting1.addTalk(talk1);
 		expectedMeeting1.addTalk(talk2);
 
-		dbSeeder.seedData(expectedMeeting1);
+		dbRule.seedData(expectedMeeting1);
 	}
 
 	@Test
@@ -75,7 +80,7 @@ public class MeetingServiceIntegrationTest {
 
 	@Test
 	public void shouldBeAbleToGetMeetings() {
-		dbSeeder.seedData(expectedMeeting2);
+		dbRule.seedData(expectedMeeting2);
 		List<MeetingTO> meetings = meetingService.getMeetings();
 		
 		assertThat(meetings).hasSize(2);

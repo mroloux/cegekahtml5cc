@@ -10,6 +10,7 @@ import javax.ws.rs.core.MediaType;
 
 import org.joda.time.LocalDateTime;
 import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.ContextLoaderListener;
@@ -23,7 +24,7 @@ import be.cegeka.eventualizr.domain.Meeting;
 import be.cegeka.eventualizr.domain.MeetingForTests;
 import be.cegeka.eventualizr.domain.Talk;
 import be.cegeka.eventualizr.domain.TalkForTests;
-import be.cegeka.eventualizr.domain.infrastructure.DBSeeder;
+import be.cegeka.eventualizr.domain.infrastructure.DBRule;
 import be.cegeka.eventualizr.web.test.infrastructure.JsonHelper;
 import be.cegeka.eventualizr.web.test.infrastructure.SpringAwareGrizzlyWebTestContainerFactory;
 
@@ -37,13 +38,16 @@ import com.sun.jersey.test.framework.spi.container.TestContainerException;
 import com.sun.jersey.test.framework.spi.container.TestContainerFactory;
 
 public class MeetingResourceTest extends JerseyTest {
+	
+	@Rule
+	@Autowired
+	public DBRule dbRule;
+	
 
 	@Autowired
 	private MeetingService meetingService;
 	@Autowired
 	private MeetingMapper meetingMapper;
-	@Autowired
-	private DBSeeder dbSeeder;
 	private Meeting meeting1;
 	private Talk talk1;
 	private Talk talk2;
@@ -106,7 +110,7 @@ public class MeetingResourceTest extends JerseyTest {
 
 	@Test
 	public void shouldBeAbleToUpdateMeeting() throws Exception {
-		dbSeeder.seedDataTransactional(meeting1);
+		dbRule.seedData(meeting1);
 		MeetingTO meetingTO = meetingMapper.toTO(meeting1);
 		meetingTO.setTitle("new title");
 
@@ -128,7 +132,7 @@ public class MeetingResourceTest extends JerseyTest {
 		Meeting meeting2 = MeetingForTests.withDefaults(new LocalDateTime(2013,
 				01, 21, 20, 00), new LocalDateTime(2013, 01, 21, 22, 00));
 
-		dbSeeder.seedDataTransactional(meeting1, meeting2);
+		dbRule.seedData(meeting1, meeting2);
 
 		WebResource webResource = resource();
 
@@ -149,7 +153,7 @@ public class MeetingResourceTest extends JerseyTest {
 
 	@Test
 	public void shouldBeAbleToGetMeeting() throws Exception {
-		dbSeeder.seedDataTransactional(meeting1);
+		dbRule.seedData(meeting1);
 
 		WebResource webResource = resource();
 
@@ -164,7 +168,7 @@ public class MeetingResourceTest extends JerseyTest {
 	
 	@Test
 	public void shouldBeAbleToCreateNewTalk() throws Exception {
-		dbSeeder.seedDataTransactional(meeting1);
+		dbRule.seedData(meeting1);
 		
 		TalkTO talkTO = createTalkTO();
 
@@ -185,7 +189,7 @@ public class MeetingResourceTest extends JerseyTest {
 
 	@Test
 	public void shouldBeAbleToUpdateTalk() throws Exception {
-		dbSeeder.seedDataTransactional(meeting1);
+		dbRule.seedData(meeting1);
 		TalkTO talkTO = meetingMapper.toTO(meeting1.getTalks().get(0));
 		talkTO.setSubject("new subject");
 
@@ -205,7 +209,7 @@ public class MeetingResourceTest extends JerseyTest {
 
 	@Test
 	public void shouldBeAbleToGetTalks() throws Exception {
-		dbSeeder.seedDataTransactional(meeting1);
+		dbRule.seedData(meeting1);
 
 		WebResource webResource = resource();
 
@@ -226,7 +230,7 @@ public class MeetingResourceTest extends JerseyTest {
 
 	@Test
 	public void shouldBeAbleToGetTalk() throws Exception {
-		dbSeeder.seedDataTransactional(meeting1);
+		dbRule.seedData(meeting1);
 
 		WebResource webResource = resource();
 

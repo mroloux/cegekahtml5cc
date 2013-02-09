@@ -43,7 +43,9 @@ public class SpringAwareGrizzlyWebTestContainerFactory extends
 				.getRequiredWebApplicationContext(servletContext);
 		AutowireCapableBeanFactory beanFactory = ctx
 				.getAutowireCapableBeanFactory();
-		beanFactory.autowireBean(springTarget);
+		
+		beanFactory.autowireBeanProperties(springTarget, AutowireCapableBeanFactory.AUTOWIRE_NO, false);
+		beanFactory.initializeBean(springTarget, springTarget.getClass().getName());
 	}
 
 }

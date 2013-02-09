@@ -2,19 +2,18 @@ package be.cegeka.eventualizr.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlRootElement;
 
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
 
 @Entity
-@XmlRootElement(name = "talk")
-@XmlAccessorType(XmlAccessType.FIELD)
+@Table(name=Talk.TALK_TABLE_NAME)
 public class Talk extends AbstractEntity {
+	
+	public static final String TALK_TABLE_NAME = "Talk";
 
 	@NotNull
 	@Size(max = 64)

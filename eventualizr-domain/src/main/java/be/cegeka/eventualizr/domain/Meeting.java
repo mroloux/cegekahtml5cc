@@ -8,6 +8,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
@@ -17,7 +18,10 @@ import org.joda.time.LocalDateTime;
 import com.google.common.collect.Lists;
 
 @Entity
+@Table(name=Meeting.MEETING_TABLE_NAME)
 public class Meeting extends AbstractEntity {
+
+	public static final String MEETING_TABLE_NAME = "Meeting";
 
 	@NotNull
 	@Size(max = 64)
