@@ -36,9 +36,6 @@
 	<profiles>
 		<profile>
 			<id>localdb</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
 			<build>
 				<plugins>
 					<plugin>

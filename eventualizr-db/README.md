@@ -4,7 +4,7 @@ Module that contains db scripts for maintaining local db.
 ##useful maven commando's for database
 See <http://www.dbmaintain.org/overview.html> for more info on dbmaintain.  
 __Make sure you are in the eventualizr-db root folder!__
-__When you run mvn clean install from eventualizr root folder the local db gets updated as well!!__
+__When you run 'mvn clean install -Plocaldb' from eventualizr root folder the local db gets updated as well!!__
 
 ###clearDatabase
 Task that removes all database items (from localdatabase) like tables, views etc from the database and empties the DBMAINTAIN_SCRIPTS table.
