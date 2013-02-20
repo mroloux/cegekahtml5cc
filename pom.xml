@@ -18,33 +18,13 @@
 		<jackson.version>2.1.1</jackson.version>
 		<mysql.version>5.1.22</mysql.version>
 	</properties>
-	<profiles>
-		<profile>
-			<id>rw</id>
-			<modules>
-				<module>eventualizr-db</module>
-				<module>eventualizr-domain</module>
-				<module>eventualizr-application</module>
-				<module>eventualizr-rest</module>
-				<module>eventualizr-dropwizard</module>
-				<module>eventualizr-web-angular-robin-wim</module>
-			</modules>
-		</profile>
-		<profile>
-			<id>default</id>
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
-			<modules>
-				<module>eventualizr-db</module>
-				<module>eventualizr-domain</module>
-				<module>eventualizr-application</module>
-				<module>eventualizr-rest</module>
-				<module>eventualizr-dropwizard</module>
-				<module>eventualizr-web-angular</module>
-			</modules>
-		</profile>
-	</profiles>
+	<modules>
+		<module>eventualizr-db</module>
+		<module>eventualizr-domain</module>
+		<module>eventualizr-application</module>
+		<module>eventualizr-dropwizard</module>
+		<module>eventualizr-web-angular</module>
+	</modules>
 	<dependencyManagement>
 		<dependencies>
 			<!-- spring -->
@@ -116,6 +96,11 @@
 			</dependency>
 			<!-- db -->
 			<dependency>
+				<groupId>org.hibernate.javax.persistence</groupId>
+				<artifactId>hibernate-jpa-2.0-api</artifactId>
+				<version>1.0.1.Final</version>
+			</dependency>
+			<dependency>
 				<groupId>org.hibernate</groupId>
 				<artifactId>hibernate-entitymanager</artifactId>
 				<version>4.1.6.Final</version>
@@ -186,95 +171,6 @@
 				<artifactId>dbmaintain</artifactId>
 				<version>2.4</version>
 				<scope>test</scope>
-			</dependency>
-			<!-- jersey -->
-			<dependency>
-				<groupId>com.sun.jersey</groupId>
-				<artifactId>jersey-server</artifactId>
-				<version>${jersey.version}</version>
-				<scope>compile</scope>
-			</dependency>
-			<dependency>
-				<groupId>com.sun.jersey</groupId>
-				<artifactId>jersey-json</artifactId>
-				<version>${jersey.version}</version>
-				<scope>compile</scope>
-			</dependency>
-			<dependency>
-				<groupId>com.sun.jersey.contribs</groupId>
-				<artifactId>jersey-spring</artifactId>
-				<version>${jersey.version}</version>
-				<exclusions>
-					<exclusion>
-						<artifactId>spring</artifactId>
-						<groupId>org.springframework</groupId>
-					</exclusion>
-					<exclusion>
-						<artifactId>spring-web</artifactId>
-						<groupId>org.springframework</groupId>
-					</exclusion>
-				</exclusions>
-			</dependency>
-			<dependency>
-				<groupId>com.fasterxml.jackson.core</groupId>
-				<artifactId>jackson-databind</artifactId>
-				<version>${jackson.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.fasterxml.jackson.jaxrs</groupId>
-				<artifactId>jackson-jaxrs-json-provider</artifactId>
-				<version>${jackson.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.fasterxml.jackson.dataformat</groupId>
-				<artifactId>jackson-dataformat-yaml</artifactId>
-				<version>${jackson.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.fasterxml.jackson.datatype</groupId>
-				<artifactId>jackson-datatype-guava</artifactId>
-				<version>${jackson.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.fasterxml.jackson.datatype</groupId>
-				<artifactId>jackson-datatype-joda</artifactId>
-				<version>${jackson.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>com.sun.xml.bind</groupId>
-				<artifactId>jaxb-impl</artifactId>
-				<version>2.1.12</version>
-				<scope>compile</scope>
-			</dependency>
-			<dependency>
-				<groupId>javax.ws.rs</groupId>
-				<artifactId>jsr311-api</artifactId>
-				<version>1.0</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>javax.xml.bind</groupId>
-				<artifactId>jaxb-api</artifactId>
-				<version>2.1</version>
-				<scope>provided</scope>
-			</dependency>
-			<dependency>
-				<groupId>com.samaxes.filter</groupId>
-				<artifactId>cachefilter</artifactId>
-				<version>2.0</version>
-			</dependency>
-			<dependency>
-				<groupId>com.sun.jersey.jersey-test-framework</groupId>
-				<artifactId>jersey-test-framework-grizzly2</artifactId>
-				<version>1.9.1</version>
-				<scope>test</scope>
-			</dependency>
-			<dependency>
-				<groupId>org.jboss.spec</groupId>
-				<artifactId>jboss-javaee-6.0</artifactId>
-				<version>2.0.0.Final</version>
-				<type>pom</type>
-				<scope>import</scope>
 			</dependency>
 			<!-- logging -->
 			<dependency>
