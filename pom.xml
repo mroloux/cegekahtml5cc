@@ -6,14 +6,6 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Eventualizr parent</name>
-	<modules>
-		<module>eventualizr-db</module>
-		<module>eventualizr-domain</module>
-		<module>eventualizr-application</module>
-		<module>eventualizr-rest</module>
-		<module>eventualizr-web-angular</module>
-		<module>eventualizr-dropwizard</module>
-	</modules>
 	<properties>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -26,6 +18,31 @@
 		<jackson.version>2.1.1</jackson.version>
 		<mysql.version>5.1.22</mysql.version>
 	</properties>
+	<profiles>
+		<profile>
+			<id>rw</id>
+			<modules>
+				<module>eventualizr-db</module>
+				<module>eventualizr-domain</module>
+				<module>eventualizr-application</module>
+				<module>eventualizr-rest</module>
+				<module>eventualizr-web-angular-robin-wim</module>
+			</modules>
+		</profile>
+		<profile>
+			<id>default</id>
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			<modules>
+				<module>eventualizr-db</module>
+				<module>eventualizr-domain</module>
+				<module>eventualizr-application</module>
+				<module>eventualizr-rest</module>
+				<module>eventualizr-web-angular</module>
+			</modules>
+		</profile>
+	</profiles>
 	<dependencyManagement>
 		<dependencies>
 			<!-- spring -->
@@ -273,11 +290,6 @@
 				<artifactId>logback-classic</artifactId>
 				<version>${logback.version}</version>
 				<scope>runtime</scope>
-			</dependency>
-			<dependency>
-				<groupId>com.yammer.dropwizard</groupId>
-				<artifactId>dropwizard-core</artifactId>
-				<version>0.6.1</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

@@ -1,0 +1,13 @@
+Search: <input ng-model="query">
+         
+<select ng-model="orderProp">
+        <option value="datum">Datum</option>
+        <option value="titel">Naam</option>
+</select>
+
+<ul id="meetings">
+        <li ng-repeat="meeting in meetings | filter:query | orderBy:orderProp">
+                <a href="#/meetings/{{meeting.id}}">{{meeting.title}}</a>
+                <p>{{meeting.venue}}</p>
+        </li>
+</ul>
