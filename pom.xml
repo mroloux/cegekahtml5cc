@@ -12,6 +12,7 @@
 		<module>eventualizr-application</module>
 		<module>eventualizr-rest</module>
 		<module>eventualizr-web-angular</module>
+		<module>eventualizr-dropwizard</module>
 	</modules>
 	<properties>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -272,6 +273,11 @@
 				<artifactId>logback-classic</artifactId>
 				<version>${logback.version}</version>
 				<scope>runtime</scope>
+			</dependency>
+			<dependency>
+				<groupId>com.yammer.dropwizard</groupId>
+				<artifactId>dropwizard-core</artifactId>
+				<version>0.6.1</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>
