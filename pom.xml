@@ -23,6 +23,8 @@
 		<module>eventualizr-domain</module>
 		<module>eventualizr-application</module>
 		<module>eventualizr-dropwizard</module>
+				<module>eventualizr-dropwizard</module>
+				<module>eventualizr-dropwizard</module>
 		<module>eventualizr-web-angular</module>
 	</modules>
 	<dependencyManagement>
