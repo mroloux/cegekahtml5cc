@@ -13,3 +13,9 @@ angular.module('eventualizrApp.services').factory('Meeting', ['$resource', funct
 	
 	return Meeting;
 }]);
+
+angular.module('eventualizrApp.services').factory('Talk', ['$resource', function($resource){
+	var Talk = $resource('api/meetings/:meetingId/talks', {meetingId: '@meetingId'});
+	
+	return Talk;
+}]);

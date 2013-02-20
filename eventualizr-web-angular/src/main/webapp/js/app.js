@@ -5,7 +5,6 @@
 angular.module('eventualizrApp', ['ngResource', 'eventualizrApp.filters', 'eventualizrApp.services', 'eventualizrApp.directives']).
   config(['$routeProvider', function($routeProvider) {
 	$routeProvider.when('/meetings', {templateUrl: 'partials/meeting-list.html', controller: MeetingListController});
-    $routeProvider.when('/view1', {templateUrl: 'partials/partial1.html', controller: MyCtrl1});
-    $routeProvider.when('/view2', {templateUrl: 'partials/partial2.html', controller: MyCtrl2});
+	$routeProvider.when('/meetings/:meetingId', {templateUrl: 'partials/meeting-detail.html', controller: MeetingDetailController});
     $routeProvider.otherwise({redirectTo: '/meetings'});
   }]);

@@ -3,17 +3,13 @@
 /* Controllers */
 
 function MeetingListController($scope, Meeting) {
-
     $scope.meetings = Meeting.query();
-
     $scope.orderProp = 'datum';
 }
 MeetingListController.$inject = ['$scope', 'Meeting'];
 
-function MyCtrl1() {}
-MyCtrl1.$inject = [];
 
-
-function MyCtrl2() {
+function MeetingDetailController($scope, $routeParams, Talk) {
+    $scope.talks = Talk.query({meetingId: $routeParams.meetingId});
 }
-MyCtrl2.$inject = [];
+MeetingDetailController.$inject = ['$scope', '$routeParams', 'Talk'];
