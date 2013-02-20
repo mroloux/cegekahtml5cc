@@ -26,6 +26,7 @@
 				<module>eventualizr-domain</module>
 				<module>eventualizr-application</module>
 				<module>eventualizr-rest</module>
+				<module>eventualizr-dropwizard</module>
 				<module>eventualizr-web-angular-robin-wim</module>
 			</modules>
 		</profile>
@@ -39,6 +40,7 @@
 				<module>eventualizr-domain</module>
 				<module>eventualizr-application</module>
 				<module>eventualizr-rest</module>
+				<module>eventualizr-dropwizard</module>
 				<module>eventualizr-web-angular</module>
 			</modules>
 		</profile>
