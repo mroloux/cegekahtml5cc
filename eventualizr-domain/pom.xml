@@ -100,5 +100,23 @@
 				</resources>
 			</build>
 		</profile>
+		<profile>
+			<id>heroku</id>
+			<activation>
+				<property>
+					<name>heroku</name>
+				</property>
+			</activation>
+			<build>
+				<resources>
+					<resource>
+						<directory>src/main/resources</directory>
+					</resource>
+					<resource>
+						<directory>src/main/heroku-resources</directory>
+					</resource>
+				</resources>
+			</build>
+		</profile>
 	</profiles>
 </project>
