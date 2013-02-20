@@ -87,7 +87,7 @@
 		<profile>
 			<id>dev</id>
 			<activation>
-				<activeByDefault>true</activeByDefault>
+				<name>!heroku</name>
 			</activation>
 			<build>
 				<resources>
