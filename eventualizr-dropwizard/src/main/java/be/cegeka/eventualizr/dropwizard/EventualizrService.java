@@ -1,11 +1,14 @@
 package be.cegeka.eventualizr.dropwizard;
 
-import be.cegeka.eventualizr.dropwizard.healthcheck.TemplateHealthCheck;
-import be.cegeka.eventualizr.dropwizard.resource.EventualizrResource;
-
+import be.cegeka.eventualizr.dropwizard.resource.EventualizrConfiguration;
 import com.yammer.dropwizard.Service;
 import com.yammer.dropwizard.config.Bootstrap;
 import com.yammer.dropwizard.config.Environment;
+import org.reflections.Reflections;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+
+import javax.ws.rs.Path;
+import java.util.Set;
 
 public class EventualizrService extends Service<EventualizrConfiguration> {
 
@@ -20,10 +23,16 @@ public class EventualizrService extends Service<EventualizrConfiguration> {
 
     @Override
     public void run(EventualizrConfiguration configuration, Environment environment) {
-    	final String template = configuration.getTemplate();
-        final String defaultName = configuration.getDefaultName();
-        environment.addResource(new EventualizrResource(template, defaultName));
-        environment.addHealthCheck(new TemplateHealthCheck(template));
+        ClassPathXmlApplicationContext applicationContext = new ClassPathXmlApplicationContext(
+                "domain-context.xml",
+                "application-context.xml",
+                "datasource-context.xml",
+                "dropwizard-context.xml"
+        );
+        Set<Class<?>> resourceClasses = new Reflections("be.cegeka.eventualizr.dropwizard").getTypesAnnotatedWith(Path.class);
+        for (Class<?> resource : resourceClasses) {
+            environment.addResource(applicationContext.getBean(resource));
+        }
     }
 
 }

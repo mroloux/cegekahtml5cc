@@ -1,35 +1,27 @@
 package be.cegeka.eventualizr.dropwizard.resource;
 
-import java.util.concurrent.atomic.AtomicLong;
+import be.cegeka.eventualizr.application.MeetingService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 
-import be.cegeka.eventualizr.dropwizard.model.Saying;
-
-import com.google.common.base.Optional;
-import com.yammer.metrics.annotation.Timed;
-
+@Component
 @Path("/hello-world")
 @Produces(MediaType.APPLICATION_JSON)
 public class EventualizrResource {
-	private final String template;
-	private final String defaultName;
-	private final AtomicLong counter;
 
-	public EventualizrResource(String template, String defaultName) {
-		this.template = template;
-		this.defaultName = defaultName;
-		this.counter = new AtomicLong();
+    @Autowired
+    private MeetingService meetingService;
+
+    public EventualizrResource() {
 	}
 
 	@GET
-	@Timed
-	public Saying sayHello(@QueryParam("name") Optional<String> name) {
-		return new Saying(counter.incrementAndGet(), String.format(template,
-				name.or(defaultName)));
+	public String sayHello() {
+		return Integer.toString(meetingService.getMeetings().size());
 	}
 }

@@ -20,12 +20,12 @@
 		<dependency>
 			<groupId>be.cegeka.eventualizr</groupId>
 			<artifactId>eventualizr-application</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
+            <version>${project.version}</version>
 		</dependency>
         <dependency>
-            <groupId>com.github.pnayak</groupId>
-            <artifactId>dropwizard-spring-annotations</artifactId>
-            <version>0.5.0</version>
+            <groupId>org.reflections</groupId>
+            <artifactId>reflections</artifactId>
+            <version>0.9.8</version>
         </dependency>
 	</dependencies>
 	<build>
