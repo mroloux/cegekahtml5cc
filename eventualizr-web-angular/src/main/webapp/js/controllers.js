@@ -5,6 +5,22 @@
 function MeetingListController($scope, Meeting) {
     $scope.meetings = Meeting.query();
     $scope.orderProp = 'datum';
+    $scope.newMeeting = new Meeting();
+    
+    $scope.isAddNewMeetingFormVisible = false;
+    $scope.showAddNewMeetingForm = function() {
+    	$scope.isAddNewMeetingFormVisible = true;
+    };
+    
+    $scope.update = function(newMeeting) {
+    	newMeeting.$save();
+     	$scope.meetings = Meeting.query();
+    };
+
+    $scope.cancelNewMeeting = function(newMeeting) {
+    	$scope.newMeeting = new Meeting();
+    	$scope.isAddNewMeetingFormVisible = false;
+    };
 }
 MeetingListController.$inject = ['$scope', 'Meeting'];
 
