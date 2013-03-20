@@ -1,6 +1,11 @@
-<p>Talks for meeting:</p>
+<p>Talks for {{meeting.title}} @ {{meeting.venue}}</p>
 <ul id="talks">
         <li ng-repeat="talk in talks">
-                {{talk.speaker}} -- {{talk.subject}}
+                <div class="talkSubject">Subject: {{talk.subject}}</div>
+                <div class="talkSummary">Summary: {{talk.summary}}</div>
+                <div class="talkObjective">Objective: {{talk.objective}}</div>
+                <div class="talkSpeaker">Speaker: {{talk.speaker}}</div>
+                <div class="talkLocation">Location: {{talk.location}}</div>
+      			<div class="talkTime">Time: {{talk.from | date:'dd/MM/yyyy H:mm'}} - {{talk.till | date:'H:mm'}}</div>
         </li>
 </ul>

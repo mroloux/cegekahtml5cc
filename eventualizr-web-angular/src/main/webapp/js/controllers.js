@@ -9,7 +9,8 @@ function MeetingListController($scope, Meeting) {
 MeetingListController.$inject = ['$scope', 'Meeting'];
 
 
-function MeetingDetailController($scope, $routeParams, Talk) {
+function MeetingDetailController($scope, $routeParams, Meeting, Talk) {
     $scope.talks = Talk.query({meetingId: $routeParams.meetingId});
+    $scope.meeting = Meeting.get({meetingId: $routeParams.meetingId});
 }
-MeetingDetailController.$inject = ['$scope', '$routeParams', 'Talk'];
+MeetingDetailController.$inject = ['$scope', '$routeParams', 'Meeting', 'Talk'];
