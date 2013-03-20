@@ -13,11 +13,15 @@ function MeetingListController($scope, Meeting) {
     };
     
     $scope.update = function(newMeeting) {
-    	newMeeting.$save();
-     	$scope.meetings = Meeting.query();
+    	newMeeting.$save({}, function(data) {
+    		$scope.meetings = Meeting.query();
+    		$scope.cancelNewMeeting();
+        }, function(data) {
+            console.log(data);               
+        });
     };
 
-    $scope.cancelNewMeeting = function(newMeeting) {
+    $scope.cancelNewMeeting = function() {
     	$scope.newMeeting = new Meeting();
     	$scope.isAddNewMeetingFormVisible = false;
     };

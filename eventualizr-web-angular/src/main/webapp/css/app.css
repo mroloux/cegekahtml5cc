@@ -23,14 +23,22 @@ a:active {
 	text-decoration: none;
 }
 
-#meetings li, #talks li {
+form input.ng-invalid.ng-dirty {
+	background-color: #FA787E;
+}
+
+form input.ng-valid.ng-dirty {
+	background-color: #78FA89;
+}
+
+#meetings li,#talks li {
 	border: 1px solid #dcdcdc;
 	border-radius: 4px;
 	padding: 5px;
 	margin: 5px;
 }
 
-#meetings, #talks {
+#meetings,#talks {
 	list-style-type: none;
 }
 

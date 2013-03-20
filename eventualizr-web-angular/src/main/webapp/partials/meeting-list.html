@@ -1,19 +1,19 @@
 Search:<input ng-model="query">
 
 Sort: <select ng-model="orderProp">
-	<option value="datum">Datum</option>
-	<option value="titel">Naam</option>
+	<option value="datum">Date</option>
+	<option value="titel">Meeting</option>
 </select>
 
 <button ng-click="showAddNewMeetingForm()">Add new meeting</button>
 
 <div ng-show="isAddNewMeetingFormVisible">
-	<form novalidate class="simple-form">
-		Event: <input type="text" ng-model="newMeeting.title" required /><br> 
-		Venue: <input type="text" ng-model="newMeeting.venue" required /><br> 
+	<form name="newMeetingForm" novalidate class="simple-form">
+		Event*: <input type="text" ng-model="newMeeting.title" name="title" required /> <span class="error" ng-show="newMeetingForm.title.$dirty && newMeetingForm.title.$error.required">Required!</span><br> 
+		Venue*: <input type="text" ng-model="newMeeting.venue" name="venue" required /> <span class="error" ng-show="newMeetingForm.venue.$dirty && newMeetingForm.venue.$error.required">Required!</span><br> 
 		Start time: <br>
 		End time: <br>
-		<button ng-click="update(newMeeting)">save</button>
+		<button ng-click="update(newMeeting)" ng-disabled="newMeetingForm.$invalid">save</button>
 		<button ng-click="cancelNewMeeting()">cancel</button>
 	</form>
 </div>
@@ -21,8 +21,7 @@ Sort: <select ng-model="orderProp">
 <ul id="meetings">
 	<li ng-repeat="meeting in meetings | filter:query | orderBy:orderProp">
 		<a href="#/meetings/{{meeting.id}}"> <span class="meetingTitle">{{meeting.title}}</span><br>
-			Venue: {{meeting.venue}}<br> Date: {{meeting.start |
-			date:'dd/MM/yyyy H:mm'}} - {{meeting.end | date:'H:mm'}}
-	</a>
+			Venue: {{meeting.venue}}<br> Date: {{meeting.start | date:'dd/MM/yyyy H:mm'}} - {{meeting.end | date:'H:mm'}}
+		</a>
 	</li>
 </ul>
