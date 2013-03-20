@@ -6,23 +6,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/app.css"/>
   <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+  
 </head>
 <body ng-controller="MeetingController">
-	<div ng-repeat="meeting in meetings">
-    <div class="row-fluid">
-      <div class="span6 offset3 well">
-        <h3>{{meeting.venue}}
-        <a ng-click="getTalks(meeting)" class="btn btn-primary" style="float:right" type="button"  data-toggle="collapse" href="#talks{{meeting.id}}">+</a></h3>
-        
-        <div id="talks{{meeting.id}}" class="row-fluid accordion-body collapse in" ng-repeat="talk in meeting.talks">
-           <div class="span1 offset1">
-              {{talk.from | date:'MM/dd/yyyy'}} - {{talk.till | date:'MM/dd/yyyy'}}
-           </div>
-           <div class="span3 offset1">
-              {{talk.speaker}}
-           </div>
+  <div class="row-fluid">
+    <div class="span6 offset3 well">
+	     <div ng-repeat="meeting in meetings">
+         <h3>{{meeting.venue}}
+            <a ng-click="getTalks(meeting)" class="accordion-toggle" style="float:right" type="button" data-toggle="collapse" href="#talks{{meeting.id}}">
+              <i class="icon-plus-sign"> </i>
+            </a>
+          </h3>
+           <div id="talks{{meeting.id}}" class="collapse" style="height:auto;">
+              <div class="row-fluid" ng-repeat="talk in meeting.talks">
+                 <div class="span3 offset1">
+                    {{talk.from | date:'MM/dd/yyyy'}} - {{talk.till | date:'MM/dd/yyyy'}}
+                 </div>
+                 <div class="span3 offset1">
+                    {{talk.speaker}}
+                 </div>
+             </div>
+          </div>
         </div>
-      </div>
     </div>
   </div>
 
@@ -30,16 +35,16 @@
   <!-- In production use:
   <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
   -->
-  <script src="js/bootstrap.js"></script>
+  
   <script src="lib/angular/angular.js"></script>
   <script src="lib/angular/angular-resource.js"></script>
   <script src="js/app.js"></script>
   <script src="js/MeetingController.js"></script>
   <script src="js/services.js"></script>
-  <script src="js/controllers.js"></script>
   <script src="js/filters.js"></script>
   <script src="js/directives.js"></script>
-  
+  <script src="http://code.jquery.com/jquery.js"></script>
+  <script src="js/bootstrap.min.js"></script>
 </body>
 </html>
 
