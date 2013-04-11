@@ -1,31 +1,60 @@
-'use strict';
-
-/* jasmine specs for controllers go here */
-
-describe('MyCtrl1', function(){
-  var myCtrl1;
-
-  beforeEach(function(){
-    myCtrl1 = new MyCtrl1();
+describe('Eventualizr controllers', function() {
+ 
+beforeEach(function(){
+    this.addMatchers({
+      toEqualData: function(expected) {
+        return angular.equals(this.actual, expected);
+      }
+    });
   });
 
+  describe('MeetingController_getMeetings', function(){
+    var scope, ctrl, $httpBackend;
 
-  it('should ....', function() {
-    //spec body
+   beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
+        $httpBackend = _$httpBackend_;
+        $httpBackend.expectGET('api/meetings').
+            respond([{"id":0}]);
+   
+        scope = $rootScope.$new();
+        ctrl = $controller(MeetingController, {$scope: scope});
+      }));
+
+    
+    it('should call httpBackend', function() {
+      $httpBackend.flush();
+ 
+      expect(scope.meetings).toEqualData(
+          [{"id":0}]);
+    });
   });
-});
 
+  describe('MeetingController_getTalks', function(){
+    var scope, ctrl, $httpBackend;
 
-describe('MyCtrl2', function(){
-  var myCtrl2;
+   beforeEach(inject(function(_$httpBackend_, $rootScope, $controller) {
+        $httpBackend = _$httpBackend_;
+        $httpBackend.expectGET('api/meetings').
+            respond([{"id":1}]);
+   
+        $httpBackend.expectGET('api/meetings/1/talks').
+            respond([{"id":0}]);
+        scope = $rootScope.$new();
+        ctrl = $controller(MeetingController, {$scope: scope});
+      }));
 
+    
+    it('should call httpBackend', function() {
+      ctrl.getTalks(scope.meetings[0]);
+      
+      $httpBackend.flush();
+ 
+      
 
-  beforeEach(function(){
-    myCtrl2 = new MyCtrl2();
+      expect(scope.meetings).toEqualData(
+          [{"id":1,talks:[{"id":0}]}]);
+
+    });
   });
 
-
-  it('should ....', function() {
-    //spec body
-  });
 });

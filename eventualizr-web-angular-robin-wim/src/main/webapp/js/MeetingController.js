@@ -1,24 +1,9 @@
-function MeetingController($scope, $http){
+function MeetingController($scope, $http, AllMeetings){
 
-	$http.get('api/meetings').success(function(data, status, headers, config){
-		$scope.meetings = data;
-	})
-	.error(function(){
-		alert("backend not responding");
-	}
-	);
-
-	$scope.getTalks = function (meeting){
-		$http.get('api/meetings/'+meeting.id+'/talks')
-		.success(function(data, status, headers, config){
-			meeting.talks = data;
+	$scope.meetings = AllMeetings.success(function(data, status, headers, config){
+			$scope.meetings = data;
 		})
 		.error(function(){
 			alert("backend not responding");
-		}
-		);
-	}
-
-	
-
+		});
 }

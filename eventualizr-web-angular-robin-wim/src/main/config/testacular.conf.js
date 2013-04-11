@@ -18,3 +18,5 @@ junitReporter = {
   outputFile: 'test_out/unit.xml',
   suite: 'unit'
 };
+
+exclude = ['webapp/js/bootstrap.js', 'webapp/js/bootstrap.min.js'];
