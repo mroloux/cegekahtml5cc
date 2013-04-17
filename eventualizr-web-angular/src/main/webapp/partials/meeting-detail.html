@@ -1,4 +1,10 @@
-<p>Talks for {{meeting.title}} @ {{meeting.venue}} {{meeting.start | date:'dd/MM/yyyy H:mm'}} - {{meeting.end | date:'H:mm'}}</p>
+<button type="button" class="btn pull-right" ng-click="remove(meeting)">
+	<i class="icon-trash"></i>
+</button>
+
+<ng-include src="'partials/meetingOverview.html'"></ng-include>
+
+<h3>Talks</h3>
 <ul id="talks">
 	<li ng-repeat="talk in talks" class="roundedGreyBorder">
     	<div class="talkSubject">Subject: {{talk.subject}}</div>

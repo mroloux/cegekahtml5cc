@@ -1,6 +1,7 @@
 /* app css stylesheet */
 body {
 	font-family: "Trebuchet MS", Helvetica, sans-serif;
+  	padding-top: 60px;
 }
 
 a:link {
@@ -33,6 +34,10 @@ form, .form-actions {
 	padding: 5px;
 }
 
+.flashyBackground {
+	background-color: #e6e6fa;
+}
+
 #meetings li,#talks li {
 	margin: 5px;
 }
@@ -41,15 +46,11 @@ form, .form-actions {
 	list-style-type: none;
 }
 
-#meetings li .meetingTitle {
+.meetingTitle {
 	font-size: 1.2em;
 }
 
-#meetings li:hover {
-	background-color: #e6e6fa;
-}
-
-#meetings li a {
+.fullyClickableLink {
 	display: block;
 	width: 100%;
 }

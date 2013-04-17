@@ -1,18 +1,18 @@
-Search:<input type="text" ng-model="query">
+<h3>All meetings</h3>
+<button type="button" class="btn pull-right newMeetingElements" bs-modal="'partials/createMeeting.html'"><i class="icon-plus"></i> New meeting</button>
+Search:
+<input type="text" ng-model="query">
 
-Sort: <select ng-model="orderProp">
-	<option value="datum">Date</option>
-	<option value="titel">Meeting</option>
+Sort:
+<select ng-model="orderProp">
+	<option value="start">Date</option>
+	<option value="title">Meeting</option>
 </select>
-  
-<button type="button" class="btn newMeetingElements" bs-modal="'partials/createMeeting.html'"><i class="icon-plus"></i> New meeting</button>
-
 <ul id="meetings">
-	<li ng-repeat="meeting in meetings | filter:query | orderBy:orderProp" class="roundedGreyBorder">
-		<a href="#/meetings/{{meeting.id}}"> <span class="meetingTitle">{{meeting.title}}</span><br>
-			Venue: {{meeting.venue}}<br> Date: {{meeting.start | date:'dd/MM/yyyy H:mm'}} - {{meeting.end | date:'H:mm'}}
-		</a>
-		<button type="button" class="btn" ng-click="remove(meeting)"><i class="icon-trash"></i> Delete</button>
+	<li ng-repeat="meeting in meetings | filter:query | orderBy:orderProp" class="roundedGreyBorder flashyBackground">
+		<a href="#/meetings/{{meeting.id}}" class="fullyClickableLink">
+  			<ng-include src="'partials/meetingOverview.html'"></ng-include>
+  		</a>
 	</li>
 </ul>
 
