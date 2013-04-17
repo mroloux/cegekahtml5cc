@@ -2,24 +2,53 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
     <parent>
         <artifactId>eventualizr</artifactId>
         <groupId>be.cegeka.eventualizr</groupId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <modelVersion>4.0.0</modelVersion>
-
     <artifactId>eventualizr-android</artifactId>
     <packaging>apk</packaging>
 
+    <properties>
+        <android-platform>10</android-platform>
+        <android-emulator>10</android-emulator>
+        <android-version>2.3.3</android-version>
+        <android.sdk.path>/Developer/android-sdk-macosx</android.sdk.path>
+    </properties>
+
     <build>
-    <sourceDirectory>src</sourceDirectory>
+        <sourceDirectory>src</sourceDirectory>
+        <finalName>${project.artifactId}</finalName>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+                    <artifactId>android-maven-plugin</artifactId>
+                    <version>3.5.3</version>
+                    <extensions>true</extensions>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+        <plugins>
+            <plugin>
+                <groupId>com.jayway.maven.plugins.android.generation2</groupId>
+                <artifactId>android-maven-plugin</artifactId>
+                <configuration>
+                    <sdk>
+                        <platform>${android-platform}</platform>
+                    </sdk>
+                </configuration>
+            </plugin>
+        </plugins>
     </build>
+
     <dependencies>
         <dependency>
             <groupId>com.google.android</groupId>
             <artifactId>android</artifactId>
-            <version>2.3.3</version>
+            <version>${android-version}</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>

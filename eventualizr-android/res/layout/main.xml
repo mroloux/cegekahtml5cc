@@ -7,7 +7,7 @@
     <TextView
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:text="heya :d"
+            android:text="hey there, cool weather, right?"
             />
 </LinearLayout>
 
