@@ -7,7 +7,7 @@ This module uses Cordova to integrate with a sample web application. The module 
 ### Deploy on a debugged mode device
 * download https://github.com/phonegap/phonegap/blob/master/lib/android/cordova-2.6.0.jar
 * mvn install:install-file -DgroupId=org.apache.cordova -DartifactId=cordova -Dversion=2.6.0 -Dfile=cordova-2.6.0.jar -Dpackaging=jar
-* mvn -Dandroid.sdk.path=<YOUR_SDK_PATH> clean install android:deploy android:run
+* mvn -Dandroid.sdk.path=YOUR_SDK_PATH clean install android:deploy android:run
 
 ### Resources
 * http://maven-android-plugin-m2site.googlecode.com/svn/plugin-info.html
