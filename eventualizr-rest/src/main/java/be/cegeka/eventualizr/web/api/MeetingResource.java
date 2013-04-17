@@ -2,6 +2,7 @@ package be.cegeka.eventualizr.web.api;
 
 import java.util.List;
 
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -46,6 +47,11 @@ public class MeetingResource {
 	@PUT @Path("{id : \\d+}")
 	public MeetingTO update(MeetingTO meeting){
 		return meetingService.update(meeting);
+	}
+
+	@DELETE @Path("{id : \\d+}")
+	public boolean delete(@PathParam("id") Long id){
+		return meetingService.delete(id);
 	}
 	
 	@GET @Path("{id : \\d+}/talks")

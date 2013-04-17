@@ -23,18 +23,17 @@ a:active {
 	text-decoration: none;
 }
 
-form input.ng-invalid.ng-dirty {
-	background-color: #FA787E;
+form, .form-actions {
+	margin-bottom: 0;
 }
 
-form input.ng-valid.ng-dirty {
-	background-color: #78FA89;
-}
-
-#meetings li,#talks li {
+.roundedGreyBorder {
 	border: 1px solid #dcdcdc;
 	border-radius: 4px;
 	padding: 5px;
+}
+
+#meetings li,#talks li {
 	margin: 5px;
 }
 
@@ -53,4 +52,9 @@ form input.ng-valid.ng-dirty {
 #meetings li a {
 	display: block;
 	width: 100%;
+}
+
+.inputForm {
+	background-color: #f5f5f5;
+	margin: 5px;
 }

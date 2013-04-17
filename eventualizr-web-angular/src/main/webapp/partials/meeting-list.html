@@ -1,27 +1,19 @@
-Search:<input ng-model="query">
+Search:<input type="text" ng-model="query">
 
 Sort: <select ng-model="orderProp">
 	<option value="datum">Date</option>
 	<option value="titel">Meeting</option>
 </select>
-
-<button ng-click="showAddNewMeetingForm()">Add new meeting</button>
-
-<div ng-show="isAddNewMeetingFormVisible">
-	<form name="newMeetingForm" novalidate class="simple-form">
-		Event*: <input type="text" ng-model="newMeeting.title" name="title" required /> <span class="error" ng-show="newMeetingForm.title.$dirty && newMeetingForm.title.$error.required">Required!</span><br> 
-		Venue*: <input type="text" ng-model="newMeeting.venue" name="venue" required /> <span class="error" ng-show="newMeetingForm.venue.$dirty && newMeetingForm.venue.$error.required">Required!</span><br> 
-		Start time: <br>
-		End time: <br>
-		<button ng-click="update(newMeeting)" ng-disabled="newMeetingForm.$invalid">save</button>
-		<button ng-click="cancelNewMeeting()">cancel</button>
-	</form>
-</div>
+  
+<button type="button" class="btn newMeetingElements" bs-modal="'partials/createMeeting.html'"><i class="icon-plus"></i> New meeting</button>
 
 <ul id="meetings">
-	<li ng-repeat="meeting in meetings | filter:query | orderBy:orderProp">
+	<li ng-repeat="meeting in meetings | filter:query | orderBy:orderProp" class="roundedGreyBorder">
 		<a href="#/meetings/{{meeting.id}}"> <span class="meetingTitle">{{meeting.title}}</span><br>
 			Venue: {{meeting.venue}}<br> Date: {{meeting.start | date:'dd/MM/yyyy H:mm'}} - {{meeting.end | date:'H:mm'}}
 		</a>
+		<button type="button" class="btn" ng-click="remove(meeting)"><i class="icon-trash"></i> Delete</button>
 	</li>
 </ul>
+
+

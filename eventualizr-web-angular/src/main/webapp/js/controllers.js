@@ -3,27 +3,26 @@
 /* Controllers */
 
 function MeetingListController($scope, Meeting) {
-    $scope.meetings = Meeting.query();
-    $scope.orderProp = 'datum';
-    $scope.newMeeting = new Meeting();
-    
-    $scope.isAddNewMeetingFormVisible = false;
-    $scope.showAddNewMeetingForm = function() {
-    	$scope.isAddNewMeetingFormVisible = true;
+	$scope.resetNewMeeting = function() {
+    	$scope.newMeeting = new Meeting();
     };
+    
+	$scope.meetings = Meeting.query();
+    $scope.orderProp = 'datum';
+    $scope.resetNewMeeting();
     
     $scope.update = function(newMeeting) {
     	newMeeting.$save({}, function(data) {
     		$scope.meetings = Meeting.query();
-    		$scope.cancelNewMeeting();
+    		$scope.resetNewMeeting();
         }, function(data) {
             console.log(data);               
         });
     };
-
-    $scope.cancelNewMeeting = function() {
-    	$scope.newMeeting = new Meeting();
-    	$scope.isAddNewMeetingFormVisible = false;
+    $scope.remove = function(meeting) {
+    	meeting.$delete({meetingId:meeting.id}, function() {
+    		$scope.meetings = Meeting.query();
+    	});
     };
 }
 MeetingListController.$inject = ['$scope', 'Meeting'];

@@ -1,0 +1,39 @@
+<div class="newMeetingElements">
+	<div class="inputForm roundedGreyBorder">
+		<p>Add a new meeting:</p>
+		<form name="newMeetingForm" novalidate class="form-horizontal">
+			<div class="control-group">
+				<label class="control-label" for="title">Event</label>
+			    <div class="controls">
+			    	<input type="text" id="title" name="title" ng-model="newMeeting.title" placeholder="Event name" required>
+			    </div>
+			</div>
+			
+			<div class="control-group">
+				<label class="control-label" for="venue">Venue</label>
+			    <div class="controls">
+			    	<input type="text" id="venue" name="venue" ng-model="newMeeting.venue" placeholder="Venue" required>
+			    </div>
+			</div>
+			
+			<div class="control-group">
+				<label class="control-label" for="starttime">Start time</label>
+			    <div class="controls">
+			    	<input type="text" id="starttime" name="starttime" ng-model="newMeeting.start">
+			    </div>
+			</div>
+
+			<div class="control-group">
+				<label class="control-label" for="endtime">End time</label>
+			    <div class="controls">
+			    	<input type="text" id="endtime" name="endtime" ng-model="newMeeting.end">
+			    </div>
+			</div>
+			
+			<div class="form-actions">
+				<button ng-click="update(newMeeting); dismiss();" ng-disabled="newMeetingForm.$invalid" class="btn btn-primary">save</button>
+				<button ng-click="dismiss();" class="btn">cancel</button>
+			</div>
+		</form>
+	</div>
+</div>

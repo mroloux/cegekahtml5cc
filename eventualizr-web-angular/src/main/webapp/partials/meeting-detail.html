@@ -1,6 +1,6 @@
 <p>Talks for {{meeting.title}} @ {{meeting.venue}} {{meeting.start | date:'dd/MM/yyyy H:mm'}} - {{meeting.end | date:'H:mm'}}</p>
 <ul id="talks">
-	<li ng-repeat="talk in talks">
+	<li ng-repeat="talk in talks" class="roundedGreyBorder">
     	<div class="talkSubject">Subject: {{talk.subject}}</div>
         <div class="talkSpeaker">Speaker: {{talk.speaker}}</div>
         <div class="talkObjective">Objective: {{talk.objective}}</div>

@@ -52,6 +52,11 @@ public class MeetingService {
 		return meetingMapper.toTO(meetingRepository.save(meeting));
 	}
 	
+	public boolean delete(Long id) {
+		meetingRepository.delete(id);
+		return meetingRepository.findOne(id) == null;
+	}
+	
 	@Transactional(readOnly=true)
 	public TalkTO getTalk(Long meetingId, Long talkId) {
 		Meeting meeting = meetingRepository.findOne(meetingId);
@@ -88,5 +93,4 @@ public class MeetingService {
 	private Talk getLastTask(List<Talk> talks) {
 		return talks.get(talks.size() - 1);
 	}
-
 }

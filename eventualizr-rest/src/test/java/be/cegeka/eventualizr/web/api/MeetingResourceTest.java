@@ -3,6 +3,7 @@ package be.cegeka.eventualizr.web.api;
 import static be.cegeka.eventualizr.application.infrastructure.CommonAssert.assertMeetingTO;
 import static be.cegeka.eventualizr.application.infrastructure.CommonAssert.assertTalkTO;
 import static org.fest.assertions.api.Assertions.assertThat;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -164,6 +165,19 @@ public class MeetingResourceTest extends JerseyTest {
 				.fromJson(meetingsJson, MeetingTO.class);
 
 		assertMeetingTO(meetingTO, meeting1);
+	}
+
+	@Test
+	public void shouldBeAbleToRemoveMeeting() throws Exception {
+		dbRule.seedData(meeting1);
+		
+		WebResource webResource = resource();
+		
+		String delete = webResource
+				.path("meetings/" + meeting1.getId().intValue())
+				.delete(String.class);
+		
+		assertTrue(Boolean.parseBoolean(delete));
 	}
 	
 	@Test
