@@ -20,7 +20,8 @@ Android port for a html5 web app.
 * https://github.com/phonegap/phonegap/
 * http://cordova.apache.org/
 
-### Tutorials
+### Tutorials/Documentation
+* http://docs.phonegap.com/en/2.6.0/
 * https://github.com/nicokruger/android-maven-phonegap
 * http://stackoverflow.com/questions/5161004/using-phonegap-for-native-application-development
 * http://stackoverflow.com/questions/tagged/cordova
