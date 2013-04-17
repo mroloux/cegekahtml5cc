@@ -4,7 +4,10 @@
 	<groupId>be.cegeka.eventualizr</groupId>
 	<artifactId>eventualizr</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>pom</packaging>
+    <modules>
+        <module>eventualizr-android</module>
+    </modules>
+    <packaging>pom</packaging>
 	<name>Eventualizr parent</name>
 	<properties>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
