@@ -15,7 +15,9 @@
         <android-platform>10</android-platform>
         <android-emulator>10</android-emulator>
         <android-version>2.3.3</android-version>
+        <cordova-version>2.6.0</cordova-version>
         <android.sdk.path>/Developer/android-sdk-macosx</android.sdk.path>
+        <java-sdk-version>1.6</java-sdk-version>
     </properties>
 
     <build>
@@ -39,6 +41,22 @@
                     <sdk>
                         <platform>${android-platform}</platform>
                     </sdk>
+                    <undeployBeforeDeploy>true</undeployBeforeDeploy>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>${java-sdk-version}</source>
+                    <target>${java-sdk-version}</target>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>exec-maven-plugin</artifactId>
+                <groupId>org.codehaus.mojo</groupId>
+                <configuration>
+                    <executable>${basedir}/scripts/run_app.sh</executable>
                 </configuration>
             </plugin>
         </plugins>
@@ -50,6 +68,11 @@
             <artifactId>android</artifactId>
             <version>${android-version}</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.cordova</groupId>
+            <artifactId>cordova</artifactId>
+            <version>${cordova-version}</version>
         </dependency>
     </dependencies>
 
