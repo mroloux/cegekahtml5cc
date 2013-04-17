@@ -5,11 +5,20 @@
   <title>Eventualizr</title>
   <link rel="stylesheet" href="css/app.css"/>
 </head>
-<body>
+<body ng-controller="AppController" >
+
+    <div style="float:right">
+        <a href="#" ng-click="setEnglishLanguage()">English</a> | <a href="#" ng-click="setDutch()">Dutch</a>
+        <span data-i18n="_taal_"></span>
+        <span>{{localize.language}}</span>
+    </div>
+
   <ul class="menu">
     <li><a href="#/view1">view1</a></li>
     <li><a href="#/view2">view2</a></li>
   </ul>
+
+  <H1 data-i18n="_eventualizr_title_"></H1>
 
   <div ng-view></div>
 
@@ -21,6 +30,7 @@
   <script src="lib/angular/angular.js"></script>
   <script src="lib/angular/angular-resource.js"></script>
   <script src="js/app.js"></script>
+  <script src="lib/localize/localize.js"></script>
   <script src="js/services.js"></script>
   <script src="js/controllers.js"></script>
   <script src="js/filters.js"></script>
