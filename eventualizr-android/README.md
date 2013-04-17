@@ -12,12 +12,16 @@ Android port for a html5 web app.
 * ~~deploy native app on device with IDE~~
 * ~~add maven support~~
 * ~~deploy module on phone with android plugin~~
-* research phonegap
-* research native-html5 framework
-* include eventualizr-web-angular in it
-* test/deploy
+* ~~research phonegap/Cordova~~
+* integrate with one of our webapps
 
 ### Resources
 * http://maven-android-plugin-m2site.googlecode.com/svn/plugin-info.html
 * https://github.com/phonegap/phonegap/
+* http://cordova.apache.org/
 
+### Tutorials
+* https://github.com/nicokruger/android-maven-phonegap
+* http://stackoverflow.com/questions/5161004/using-phonegap-for-native-application-development
+* http://stackoverflow.com/questions/tagged/cordova
+* http://stackoverflow.com/questions/tagged/phonegap

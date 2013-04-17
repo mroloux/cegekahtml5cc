@@ -1,15 +1,14 @@
 package be.cegeka.eventualizr.android;
 
-import android.app.Activity;
 import android.os.Bundle;
+import org.apache.cordova.DroidGap;
 
-public class Eventualizr extends Activity {
-    /**
-     * Called when the activity is first created.
-     */
+public class Eventualizr extends DroidGap {
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        super.loadUrl("file:///android_asset/www/index.html");
+//        setContentView(R.layout.main);
     }
 }
