@@ -2,7 +2,7 @@
 In order to provide a native look and feel for an webapp on Android, we want to integrate with an existing framework, or provide 
 a port made by ourselves. Luckily, Cordova already provides the integration we're interested in. 
 
-This module uses Cordova to integrate with a sample web application. The module in action: http://is.gd/vPYew4
+This module uses Cordova to integrate with a sample web application. The module in action: http://is.gd/HstK4A
 
 ### Deploy on a debugged mode device
 * download https://github.com/phonegap/phonegap/blob/master/lib/android/cordova-2.6.0.jar
