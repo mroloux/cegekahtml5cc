@@ -7,6 +7,8 @@ function MeetingListController($scope, Meeting) {
     $scope.meetings = Meeting.query();
 
     $scope.orderProp = 'datum';
+
+
 }
 MeetingListController.$inject = ['$scope', 'Meeting'];
 

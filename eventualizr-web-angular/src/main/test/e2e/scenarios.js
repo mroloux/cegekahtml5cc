@@ -5,12 +5,19 @@
 describe('my app', function() {
 
   beforeEach(function() {
-    browser().navigateTo('../../webapp/index.html');
+    browser().navigateTo('/');
   });
 
 
-  it('should automatically redirect to /view1 when location hash/fragment is empty', function() {
-    expect(browser().location().url()).toBe("/view1");
+  it('should automatically redirect to /meetings when location hash/fragment is empty', function() {
+    expect(browser().location().url()).toBe("/meetings");
+  });
+
+  it('should show a meeting', function() {
+      //pause();
+      expect(element('[ng-view] li:first a').text()).
+          toMatch(/dsfqsd/);
+
   });
 
 

@@ -40,25 +40,25 @@ public class MeetingService {
 			}
 		});
 	};
-	
+
+    @Transactional(readOnly=true)
+    public TalkTO getTalk(Long meetingId, Long talkId) {
+        Meeting meeting = meetingRepository.findOne(meetingId);
+        Talk talk = meeting.getTalk(talkId);
+        return meetingMapper.toTO(talk);
+    }
+
 	public MeetingTO update(MeetingTO meetingTO){
 		Meeting meeting = meetingRepository.findOne(meetingTO.getId());
 		meetingMapper.mergeEntity(meeting, meetingTO);
 		return meetingMapper.toTO(meetingRepository.save(meeting));
 	}
-	
+
 	public MeetingTO create(MeetingTO meetingTO){
 		Meeting meeting = meetingMapper.toEntity(meetingTO);
 		return meetingMapper.toTO(meetingRepository.save(meeting));
 	}
-	
-	@Transactional(readOnly=true)
-	public TalkTO getTalk(Long meetingId, Long talkId) {
-		Meeting meeting = meetingRepository.findOne(meetingId);
-		Talk talk = meeting.getTalk(talkId);
-		return meetingMapper.toTO(talk);
-	}
-	
+
 	@Transactional(readOnly=true)
 	public List<TalkTO> getTalks(Long meetingId) {
 		Meeting meeting = meetingRepository.findOne(meetingId);
