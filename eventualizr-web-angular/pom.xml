@@ -47,7 +47,7 @@
                             <goal>exec</goal>
                         </goals>
                         <configuration>
-                            <executable>${basedir}/src/main/scripts/build-test.bat</executable>
+                            <executable>${basedir}/src/main/scripts/test.bat</executable>
                         </configuration>
                     </execution>
                     <execution>
@@ -57,10 +57,17 @@
                             <goal>exec</goal>
                         </goals>
                         <configuration>
-                            <executable>${basedir}/src/main/scripts/build-e2e-test.bat</executable>
+                            <executable>${basedir}/src/main/scripts/e2e-test.bat</executable>
                         </configuration>
                     </execution>
                 </executions>
+                <configuration>
+                    <arguments>
+                        <argument>--single-run</argument>
+                        <argument>--no-auto-watch</argument>
+                        <argument>--reporters=dots,junit</argument>
+                    </arguments>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
