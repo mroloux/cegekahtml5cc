@@ -257,6 +257,28 @@ public class MeetingResourceTest extends JerseyTest {
 		assertTalkTO(talkTO, talk1);
 	}
 	
+
+	@Test
+	public void shouldBeAbleToRemoveTalk() throws Exception {
+		dbRule.seedData(meeting1);
+		
+		WebResource webResource = resource();
+		
+		String delete = webResource
+				.path("meetings/" + meeting1.getId().intValue()+"/talks/"+talk1.getId().intValue())
+				.delete(String.class);
+		
+		assertThat(Boolean.parseBoolean(delete)).isTrue();
+		
+		String meetingsJson = webResource
+				.path("meetings/" + meeting1.getId().intValue() + "/talks")
+				.accept(MediaType.APPLICATION_JSON).get(String.class);
+		List<TalkTO> talks = JsonHelper.fromJson(meetingsJson, new TypeReference<List<TalkTO>>() {});
+
+		assertThat(talks).hasSize(1);
+		assertTalkTO(talks.get(0), talk2);
+	}
+	
 	private TalkTO createTalkTO() {
 		TalkTO talkTO = new TalkTO();
 		LocalDateTime from = new LocalDateTime(2013, 01, 20, 17,

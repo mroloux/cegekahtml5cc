@@ -1,5 +1,9 @@
+<div class="alerts">
+  <div class="alert fade" ng-repeat="alert in foutmeldingen" bs-alert="alert"></div>
+</div>
+
 <h3>All meetings</h3>
-<button type="button" class="btn pull-right newMeetingElements" ng-click="viaService()"><i class="icon-plus"></i> New meeting</button>
+<button type="button" class="btn pull-right newMeetingElements" ng-click="modalCreateMeeting()"><i class="icon-plus"></i> New meeting</button>
 Search:
 <input type="text" ng-model="query">
 

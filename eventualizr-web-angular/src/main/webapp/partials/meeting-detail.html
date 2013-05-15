@@ -1,3 +1,7 @@
+<div class="alerts">
+  <div class="alert fade" ng-repeat="alert in alerts" bs-alert="alert"></div>
+</div>
+
 <button type="button" class="btn pull-right" ng-click="remove(meeting)">
 	<i class="icon-trash"></i>
 </button>
@@ -5,11 +9,31 @@
 <ng-include src="'partials/meetingOverview.html'"></ng-include>
 
 <h3>Talks</h3>
-<ul id="talks">
-	<li ng-repeat="talk in talks" class="roundedGreyBorder">
-    	<div class="talkSubject">Subject: {{talk.subject}}</div>
-        <div class="talkSpeaker">Speaker: {{talk.speaker}}</div>
-        <div class="talkObjective">Objective: {{talk.objective}}</div>
-        <div class="talkLocation">Location and time: {{talk.location}} {{talk.from | date:'H:mm'}} - {{talk.till | date:'H:mm'}}</div>
-	</li>
-</ul>
+<button type="button" class="btn" bs-modal="'partials/createTalk.html'"><i class="icon-plus"></i> Add talk</button>
+
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th>Subject</th>
+			<th>Speaker</th>
+			<th>Objective</th>
+			<th>Location</th>
+			<th>Time</th>
+			<th></th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr ng-repeat="talk in talks">
+			<td>{{talk.subject}}</td>
+			<td>{{talk.speaker}}</td>
+			<td>{{talk.objective}}</td>
+			<td>{{talk.location}}</td>
+			<td>{{talk.from | date:'H:mm'}} - {{talk.till | date:'H:mm'}}</td>
+			<td>
+				<button type="button" class="btn pull-right" ng-click="removeTalk(talk)">
+					<i class="icon-trash"></i>
+				</button>
+			</td>
+		</tr>
+	</tbody>
+</table>

@@ -1,0 +1,23 @@
+<div>
+	<div>
+		<div class="modal-header">
+			<h3>Add a talk</h3>
+		</div>
+		<div class="modal-body">
+			<form name="newTalkForm" novalidate class="form-horizontal">
+				<div inputcomponent guimodel="newTalk.speaker" label="Speaker"></div>
+				<div inputcomponent guimodel="newTalk.subject" label="Subject"></div>
+				<div inputcomponent guimodel="newTalk.location" label="Location"></div>
+				<div datetimecomponent guimodel="startdate" label="Start time"></div>
+				<div datetimecomponent guimodel="enddate" label="End time"></div>
+				<div inputcomponent guimodel="newTalk.summary" label="Summary"></div>
+				<div inputcomponent guimodel="newTalk.objective" label="Objective"></div>
+			</form>
+		</div>
+			
+		<div class="modal-footer">
+			<button ng-click="update(newTalk,startdate,enddate); dismiss();" class="btn btn-primary">save</button>
+			<button ng-click="dismiss();" class="btn">cancel</button>
+		</div>
+	</div>
+</div>

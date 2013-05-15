@@ -10,7 +10,7 @@ angular.module('eventualizrApp.services').factory('Meeting', ['$resource', funct
 }]);
 
 angular.module('eventualizrApp.services').factory('Talk', ['$resource', function($resource){
-	var Talk = $resource('api/meetings/:meetingId/talks', {meetingId: '@meetingId'});
+	var Talk = $resource('api/meetings/:meetingId/talks/:talkId', {meetingId: '@meetingId', talkId: '@talkId'});
 	
 	return Talk;
 }]);

@@ -165,6 +165,17 @@ public class MeetingServiceIntegrationTest {
 		assertThat(meeting.getTalk(actualTalkTO.getId())).isNotNull();
 	}
 	
+	@Test
+	public void shouldBeAbleToRemoveTalk() {
+		List<TalkTO> talksBeforeDelete = meetingService.getTalks(expectedMeeting1.getId());
+		assertThat(talksBeforeDelete).hasSize(2);
+
+		meetingService.deleteTalk(expectedMeeting1.getId(), talk1.getId());
+		
+		List<TalkTO> talks = meetingService.getTalks(expectedMeeting1.getId());
+		assertThat(talks).hasSize(1);
+	}
+	
 	private TalkTO createTalkTO() {
 		TalkTO talkTO = new TalkTO();
 		talkTO.setFrom(start.plusDays(10));

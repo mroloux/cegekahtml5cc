@@ -93,4 +93,11 @@ public class MeetingService {
 	private Talk getLastTask(List<Talk> talks) {
 		return talks.get(talks.size() - 1);
 	}
+
+	public boolean deleteTalk(Long meetingid, Long talkid) {
+		Meeting meeting = meetingRepository.findOne(meetingid);
+		meeting.removeTalk(talkid);
+		meetingRepository.save(meeting);
+		return true;
+	}
 }

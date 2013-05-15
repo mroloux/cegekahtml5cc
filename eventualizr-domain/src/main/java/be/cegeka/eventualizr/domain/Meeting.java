@@ -12,6 +12,7 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDateTime;
 
@@ -39,7 +40,7 @@ public class Meeting extends AbstractEntity {
 	@Type(type="org.jadira.usertype.dateandtime.joda.PersistentLocalDateTime")
 	private LocalDateTime end;
 	
-	@OneToMany(cascade=CascadeType.ALL)
+	@OneToMany(cascade=CascadeType.ALL, orphanRemoval=true)
 	@JoinColumn(nullable=false, name="Meeting_id", updatable=false)
 	private List<Talk> talks = Lists.newArrayList();
 
@@ -90,6 +91,16 @@ public class Meeting extends AbstractEntity {
 			}
 		}
 		return null;
+	}
+
+	public void removeTalk(Long talkid) {
+		Talk talkToBeRemoved = null;
+		for (Talk talk : getTalks()) {
+			if(talk.getId() == talkid) {
+				talkToBeRemoved = talk;
+			}
+		}
+		talks.remove(talkToBeRemoved);
 	}
 	
 }
