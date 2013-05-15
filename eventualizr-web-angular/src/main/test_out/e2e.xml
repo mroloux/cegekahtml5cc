@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<testsuites>
+  <testsuite name="Chrome 26.0 (Windows)" package="e2e" timestamp="2013-04-23T16:50:35" id="0" hostname="HI17622" tests="4" errors="0" failures="0" time="1.911">
+    <properties>
+      <property name="browser.fullName" value="Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.31 (KHTML, like Gecko) Chrome/26.0.1410.64 Safari/537.31"/>
+    </properties>
+    <testcase name="should render view1 when user navigates to /view1" time="1.617" classname="e2e Chrome 26.0 (Windows).my app view1"/>
+    <testcase name="should render view2 when user navigates to /view2" time="0.117" classname="e2e Chrome 26.0 (Windows).my app view2"/>
+    <testcase name="should automatically redirect to /meetings when location hash/fragment is empty" time="0.098" classname="e2e Chrome 26.0 (Windows).my app"/>
+    <testcase name="should show a meeting" time="0.079" classname="e2e Chrome 26.0 (Windows).my app"/>
+    <system-out><![CDATA[
+]]></system-out>
+    <system-err/>
+  </testsuite>
+</testsuites>

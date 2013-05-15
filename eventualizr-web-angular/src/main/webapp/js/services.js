@@ -1,10 +1,5 @@
 'use strict';
 
-/* Services */
-
-
-// Demonstrate how to register services
-// In this case it is a simple value service.
 angular.module('eventualizrApp.services', []).
   value('version', '0.1');
 
@@ -19,3 +14,25 @@ angular.module('eventualizrApp.services').factory('Talk', ['$resource', function
 	
 	return Talk;
 }]);
+
+angular.module('eventualizrApp.services').factory('i18n', function($rootScope, ngI18nResourceBundle, ngI18nConfig){
+
+    function setLanguage(language) {
+        loadResourceBundle(language);
+    };
+
+    function loadResourceBundle(language){
+        ngI18nResourceBundle.get({locale: language}).success(function (resourceBundle) {
+            $rootScope.resourceBundle = resourceBundle;
+            $rootScope.$broadcast('resourceBundleLoaded', resourceBundle);
+        });
+
+    }
+
+    loadResourceBundle(ngI18nConfig.defaultLocale);
+
+    return {
+        languages: ngI18nConfig.supportedLocales,
+        setLanguage: setLanguage
+    };
+});

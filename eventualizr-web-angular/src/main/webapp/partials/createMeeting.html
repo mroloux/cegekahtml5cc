@@ -1,26 +1,26 @@
 <div class="newMeetingElements">
 	<div>
 		<div class="modal-header">
-			<h3>Add a meeting</h3>
+			<h3>{{resourceBundle.meeting.add_meeting}}</h3>
 		</div>
 		<div class="modal-body">
 			<form name="newMeetingForm" novalidate class="form-horizontal">
 				<div class="control-group">
-					<label class="control-label" for="title">Event</label>
+					<label class="control-label" for="title">{{resourceBundle.meeting.event}}</label>
 				    <div class="controls">
-				    	<input type="text" id="title" name="title" ng-model="newMeeting.title" placeholder="Event name" required>
+				    	<input type="text" id="title" name="title" ng-model="newMeeting.title" placeholder="{{resourceBundle.meeting.event_name}}" required>
 				    </div>
 				</div>
 				
 				<div class="control-group">
-					<label class="control-label" for="venue">Venue</label>
+					<label class="control-label" for="venue">{{resourceBundle.meeting.venue}}</label>
 				    <div class="controls">
-				    	<input type="text" id="venue" name="venue" ng-model="newMeeting.venue" placeholder="Venue" required>
+				    	<input type="text" id="venue" name="venue" ng-model="newMeeting.venue" placeholder="{{resourceBundle.meeting.venue}}" required>
 				    </div>
 				</div>
 				 
 				<div class="control-group">
-					<label class="control-label" for="starttime">Start time</label>
+					<label class="control-label" for="starttime">{{resourceBundle.date_time.start_time}}</label>
 				    <div class="controls">
 				    	<input type="text" id="starttime" name="starttime" ng-model="startdate.date" data-date-format="dd/mm/yyyy" bs-datepicker>
 	   				    <button type="button" class="btn" data-toggle="datepicker"><i class="icon-calendar"></i></button>
@@ -30,7 +30,7 @@
 				</div>
 	
 				<div class="control-group">
-					<label class="control-label" for="endtime">End time</label>
+					<label class="control-label" for="endtime">{{resourceBundle.date_time.end_time}}</label>
 				    <div class="controls">
 				    	<input type="text" id="endtime" name="endtime" ng-model="enddate.date" data-date-format="dd/mm/yyyy" bs-datepicker>
 	   				    <button type="button" class="btn" data-toggle="datepicker"><i class="icon-calendar"></i></button>
@@ -41,8 +41,8 @@
 		</div>
 			
 		<div class="modal-footer">
-			<button ng-click="update(newMeeting,startdate,enddate); dismiss();" ng-disabled="newMeetingForm.$invalid" class="btn btn-primary">save</button>
-			<button ng-click="dismiss();" class="btn">cancel</button>
+			<button ng-click="update(newMeeting,startdate,enddate); dismiss();" ng-disabled="newMeetingForm.$invalid" class="btn btn-primary">{{resourceBundle.buttons.save}}</button>
+			<button ng-click="dismiss();" class="btn">{{resourceBundle.buttons.cancel}}</button>
 		</div>
 	</div>
 </div>

@@ -1,0 +1,20 @@
+{
+    "language": "Language",
+    "home": "Home",
+    "meeting": {
+        "meetings": "Meetings",
+        "add_meeting": "Add a meeting",
+        "event": "Event",
+        "event_name": "Event name",
+        "venue": "Venue"
+
+    },
+    "date_time": {
+        "start_time": "Start",
+        "end_time": "End"
+    },
+    "buttons": {
+        "save": "Save",
+        "cancel": "Cancel"
+    }
+}
