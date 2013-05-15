@@ -47,7 +47,9 @@ function MeetingDetailController($scope, $routeParams, $location, Meeting, Talk)
     	});
     };
 }
-MeetingDetailController.$inject = ['$scope', '$routeParams', '$location', 'Meeting', 'Talk'];
+<<<<<<< HEAD
+MyCtrl2.$inject = [];
+
 
 /** translations */
 function AppController($scope, localize) {
@@ -65,3 +67,6 @@ function AppController($scope, localize) {
         };
 }
 AppController.$inject = ['$scope', 'localize'];
+=======
+MeetingDetailController.$inject = ['$scope', '$routeParams', '$location', 'Meeting', 'Talk'];
+>>>>>>> kaat-angularjs

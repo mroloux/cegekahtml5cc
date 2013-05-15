@@ -10,12 +10,25 @@
 	<link rel="stylesheet" href="css/app.css" />
 	<link rel="stylesheet" href="css/app_responsive.css" />
 </head>
+<<<<<<< HEAD
 <body ng-controller="AppController" >
+
     <div style="float:right">
         <a href="#" ng-click="setEnglishLanguage()">English</a> | <a href="#" ng-click="setDutch()">Dutch</a>
         <span data-i18n="_taal_"></span>
         <span>{{localize.language}}</span>
     </div>
+
+  <ul class="menu">
+    <li><a href="#/view1">view1</a></li>
+    <li><a href="#/view2">view2</a></li>
+  </ul>
+
+  <H1 data-i18n="_eventualizr_title_"></H1>
+
+  <div ng-view></div>
+=======
+<body>
 	<div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
@@ -39,16 +52,30 @@
 	<script	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular-resource.min.js"></script>
 	<script	src="http://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/2.3.1/js/bootstrap.min.js"></script>
 	<script	src="http://cdnjs.cloudflare.com/ajax/libs/angular-strap/0.7.2/angular-strap.min.js"></script>
+>>>>>>> kaat-angularjs
 
 	<!-- datepicker -->
 	<script src="lib/datepicker/datepicker-bootstrap.js"></script>
 	<script src="lib/datepicker/timepicker-bootstrap.js"></script>
 
-	<script src="js/app.js"></script>
+<<<<<<< HEAD
+  <!-- In production use:
+  <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.4/angular.min.js"></script>
+  -->
+  <script src="lib/angular/angular.js"></script>
+  <script src="lib/angular/angular-resource.js"></script>
+  <script src="js/app.js"></script>
   <script src="lib/localize/localize.js"></script>
+  <script src="js/services.js"></script>
+  <script src="js/controllers.js"></script>
+  <script src="js/filters.js"></script>
+  <script src="js/directives.js"></script>
+=======
+	<script src="js/app.js"></script>
 	<script src="js/services.js"></script>
 	<script src="js/controllers.js"></script>
 	<script src="js/filters.js"></script>
 	<script src="js/directives.js"></script>
+>>>>>>> kaat-angularjs
 </body>
 </html>

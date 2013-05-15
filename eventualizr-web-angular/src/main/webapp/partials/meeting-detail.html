@@ -1,0 +1,15 @@
+<button type="button" class="btn pull-right" ng-click="remove(meeting)">
+	<i class="icon-trash"></i>
+</button>
+
+<ng-include src="'partials/meetingOverview.html'"></ng-include>
+
+<h3>Talks</h3>
+<ul id="talks">
+	<li ng-repeat="talk in talks" class="roundedGreyBorder">
+    	<div class="talkSubject">Subject: {{talk.subject}}</div>
+        <div class="talkSpeaker">Speaker: {{talk.speaker}}</div>
+        <div class="talkObjective">Objective: {{talk.objective}}</div>
+        <div class="talkLocation">Location and time: {{talk.location}} {{talk.from | date:'H:mm'}} - {{talk.till | date:'H:mm'}}</div>
+	</li>
+</ul>

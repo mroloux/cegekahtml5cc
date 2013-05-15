@@ -1,0 +1,11 @@
+@media screen and (max-width: 800px) {
+ 	.newMeetingElements {
+ 		display:none;
+ 	}
+}
+
+@media (max-width: 979px) {
+  body {
+    padding-top: 0px;
+  }
+}

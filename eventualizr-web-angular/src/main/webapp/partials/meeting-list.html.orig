@@ -1,0 +1,24 @@
+<<<<<<< HEAD
+
+Search: <input ng-model="query">
+         
+=======
+<h3>All meetings</h3>
+<button type="button" class="btn pull-right newMeetingElements" bs-modal="'partials/createMeeting.html'"><i class="icon-plus"></i> New meeting</button>
+Search:
+<input type="text" ng-model="query">
+
+Sort:
+>>>>>>> kaat-angularjs
+<select ng-model="orderProp">
+	<option value="start">Date</option>
+	<option value="title">Meeting</option>
+</select>
+
+<ul id="meetings">
+	<li ng-repeat="meeting in meetings | filter:query | orderBy:orderProp" class="roundedGreyBorder flashyBackground">
+		<a href="#/meetings/{{meeting.id}}" class="fullyClickableLink">
+  			<ng-include src="'partials/meetingOverview.html'"></ng-include>
+  		</a>
+	</li>
+</ul>

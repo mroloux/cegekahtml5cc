@@ -11,4 +11,6 @@ public interface MeetingRepository extends Repository<Meeting, Long> {
 	Meeting findOne(Long id);
 	
 	Meeting save(Meeting entity);
+	
+	void delete(Long id);
 }
