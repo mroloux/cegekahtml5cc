@@ -8,7 +8,16 @@ function createDateFromDateTimePickers(datum){
 	return datum.date.toJSON().replace('Z','');
 }
 
-function MeetingListController($scope, Meeting) {
+function MeetingListController($scope, Meeting, $modal) {
+    $scope.modalCreateMeeting = function() {
+        var modal = $modal({
+            template: 'partials/createMeeting.html',
+            show: true,
+            backdrop: 'static',
+            scope: $scope
+        });
+    };
+
 	$scope.resetNewMeeting = function() {
     	$scope.newMeeting = new Meeting();
     	$scope.startdate = new Object();
@@ -34,7 +43,7 @@ function MeetingListController($scope, Meeting) {
         });
     };
 }
-MeetingListController.$inject = ['$scope', 'Meeting'];
+MeetingListController.$inject = ['$scope', 'Meeting', '$modal'];
 
 
 function MeetingDetailController($scope, $routeParams, $location, Meeting, Talk) {
@@ -95,18 +104,16 @@ function TalkDetailController($scope, $routeParams, $location, Talk) {
 TalkDetailController.$inject = ['$scope', '$routeParams', '$location', 'Talk'];
 
 /** translations */
-function AppController($scope, localize) {
+function AppController($scope, i18n, $strapConfig, $location) {
     window.scope =  $scope;   // watch $scope in firebug
-    $scope.People = [{FirstName:"Jim", LastName:"Lavin", Email:"jlavin@jimlavin.net", Bio:"Creator and Host of Coding Smackdown TV"}];
 
-    $scope.localize = localize;
-
-    $scope.setEnglishLanguage = function() {
-        localize.setLanguage('en');
+    $scope.setLanguage = function(lang, $event) {
+        i18n.setLanguage(lang);
+        $event.preventDefault();
+        $strapConfig.datepicker.language = lang;
+        $location.path($location.path());
     };
 
-    $scope.setDutch = function() {
-            localize.setLanguage('nl');
-        };
+    $scope.languages = i18n.languages;
 }
-AppController.$inject = ['$scope', 'localize'];
+AppController.$inject = ['$scope', 'i18n', '$strap.config', '$location'];

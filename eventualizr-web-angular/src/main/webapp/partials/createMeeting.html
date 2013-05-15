@@ -1,20 +1,20 @@
 <div class="newMeetingElements">
 	<div>
 		<div class="modal-header">
-			<h3>Add a meeting</h3>
+			<h3>{{resourceBundle.meeting.add_meeting}}</h3>
 		</div>
 		<div class="modal-body">
 			<form name="newMeetingForm" novalidate class="form-horizontal">
-				<div inputcomponent guimodel="newMeeting.title" label="Event"></div>
-				<div inputcomponent guimodel="newMeeting.venue" label="Venue"></div>
-				<div datetimecomponent guimodel="startdate" label="Start time"></div>
-				<div datetimecomponent guimodel="enddate" label="End time"></div>
+				<div inputcomponent guimodel="newMeeting.title" label="{{resourceBundle.meeting.event}}"></div>
+				<div inputcomponent guimodel="newMeeting.venue" label="{{resourceBundle.meeting.venue}}"></div>
+				<div datetimecomponent guimodel="startdate" label="{{resourceBundle.date_time.start_time}}"></div>
+				<div datetimecomponent guimodel="enddate" label="{{resourceBundle.date_time.end_time}}"></div>
 			</form>
 		</div>
 			
 		<div class="modal-footer">
-			<button ng-click="update(newMeeting,startdate,enddate); dismiss();" ng-disabled="newMeetingForm.$invalid" class="btn btn-primary">save</button>
-			<button ng-click="dismiss();" class="btn">cancel</button>
+			<button ng-click="update(newMeeting,startdate,enddate); dismiss();" ng-disabled="newMeetingForm.$invalid" class="btn btn-primary">{{resourceBundle.buttons.save}}</button>
+			<button ng-click="dismiss();" class="btn">{{resourceBundle.buttons.cancel}}</button>
 		</div>
 	</div>
 </div>

@@ -1,0 +1,20 @@
+{
+    "language" : "Taal",
+    "home" : "Home",
+    "meeting": {
+        "meetings": "Vergaderingen",
+        "add_meeting": "Meeting toevoegen",
+        "event": "Evenement",
+        "event_name": "Naam evenement",
+        "venue": "Plaats"
+
+    } ,
+    "date_time": {
+        "start_time": "Start",
+        "end_time": "Einde"
+    },
+    "buttons": {
+        "save": "Bewaren",
+        "cancel": "Annuleren"
+    }
+}
