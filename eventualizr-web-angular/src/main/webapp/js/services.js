@@ -4,15 +4,11 @@ angular.module('eventualizrApp.services', []).
   value('version', '0.1');
 
 angular.module('eventualizrApp.services').factory('Meeting', ['$resource', function($resource){
-	var Meeting = $resource('api/meetings/:meetingId', {meetingId: '@meetingId'});
-	
-	return Meeting;
+	return $resource('api/meetings/:meetingId', {meetingId: '@meetingId'});
 }]);
 
 angular.module('eventualizrApp.services').factory('Talk', ['$resource', function($resource){
-	var Talk = $resource('api/meetings/:meetingId/talks/:talkId', {meetingId: '@meetingId', talkId: '@talkId'});
-	
-	return Talk;
+	return $resource('api/meetings/:meetingId/talks/:talkId', {meetingId: '@meetingId', talkId: '@talkId'});
 }]);
 
 angular.module('eventualizrApp.services').factory('i18n', function($rootScope, ngI18nResourceBundle, ngI18nConfig){

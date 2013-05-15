@@ -67,3 +67,7 @@ form, .form-actions {
 .modal-body {
 	max-height: 500px;
 }
+
+.capitalize{
+	text-transform: capitalize;
+}

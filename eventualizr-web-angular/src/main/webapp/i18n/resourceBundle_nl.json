@@ -9,6 +9,15 @@
         "venue": "Plaats"
 
     } ,
+    "talk": {
+        "speaker": "spreker",
+        "subject": "onderwerp",
+        "location": "zaal",
+        "start": "start",
+        "end": "eind",
+        "summary": "omschrijving",
+        "objective": "doel"
+    },
     "date_time": {
         "start_time": "Start",
         "end_time": "Einde"

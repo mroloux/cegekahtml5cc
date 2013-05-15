@@ -1,9 +1,9 @@
 <dl class="dl-horizontal">
-  <dt>Speaker</dt><dd>{{talk.speaker}}</dd>
-  <dt>Subject</dt><dd>{{talk.subject}}</dd>
-  <dt>Location</dt><dd>{{talk.location}}</dd>
-  <dt>Start</dt><dd>{{talk.from}}</dd>
-  <dt>End</dt><dd>{{talk.till}}</dd>
-  <dt>Summary</dt><dd>{{talk.summary}}</dd>
-  <dt>Objective</dt><dd>{{talk.objective}}</dd>
+  <dt class="capitalize">{{resourceBundle.talk.subject}}</dt><dd>{{talk.subject}}</dd>
+  <dt class="capitalize">{{resourceBundle.talk.objective}}</dt><dd>{{talk.objective}}</dd>
+  <dt class="capitalize">{{resourceBundle.talk.speaker}}</dt><dd>{{talk.speaker}}</dd>
+  <dt class="capitalize">{{resourceBundle.talk.summary}}</dt><dd>{{talk.summary}}</dd>
+  <dt class="capitalize">{{resourceBundle.talk.start}}</dt><dd>{{talk.from | date:'dd/MM/yyyy H:mm'}}</dd>
+  <dt class="capitalize">{{resourceBundle.talk.end}}</dt><dd>{{talk.till | date:'dd/MM/yyyy H:mm'}}</dd>
+  <dt class="capitalize">{{resourceBundle.talk.location}}</dt><dd>{{talk.location}}</dd>
 </dl>

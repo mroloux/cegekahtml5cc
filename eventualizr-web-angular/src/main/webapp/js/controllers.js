@@ -98,10 +98,11 @@ function MeetingDetailController($scope, $routeParams, $location, Meeting, Talk)
 }
 MeetingDetailController.$inject = ['$scope', '$routeParams', '$location', 'Meeting', 'Talk'];
 
-function TalkDetailController($scope, $routeParams, $location, Talk) {
-    $scope.talk = Talk.query({meetingId: $routeParams.meetingId, talkId: $routeParams.talkId});
+function TalkDetailController($scope, $routeParams, $location, Meeting, Talk) {
+    $scope.talk = Talk.get({talkId: $routeParams.talkId, meetingId: $routeParams.meetingId});
+    $scope.meeting = Meeting.get({meetingId: $routeParams.meetingId});
 }
-TalkDetailController.$inject = ['$scope', '$routeParams', '$location', 'Talk'];
+TalkDetailController.$inject = ['$scope', '$routeParams', '$location', 'Meeting', 'Talk'];
 
 /** translations */
 function AppController($scope, i18n, $strapConfig, $location) {

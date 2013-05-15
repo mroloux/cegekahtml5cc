@@ -9,6 +9,15 @@
         "venue": "Venue"
 
     },
+    "talk": {
+        "speaker": "speaker",
+        "subject": "subject",
+        "location": "location",
+        "start": "start",
+        "end": "end",
+        "summary": "summary",
+        "objective": "objective"
+    },
     "date_time": {
         "start_time": "Start",
         "end_time": "End"
