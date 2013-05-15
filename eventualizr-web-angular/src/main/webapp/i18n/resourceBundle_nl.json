@@ -3,6 +3,7 @@
     "home" : "Home",
     "meeting": {
         "meetings": "Vergaderingen",
+        "meeting": "Vergadering",
         "all_meetings": "Alle vergaderingen",
         "add_meeting": "Vergadering toevoegen",
         "new_meeting": "Nieuwe vergadering",

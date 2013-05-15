@@ -3,6 +3,7 @@
     "home": "Home",
     "meeting": {
         "meetings": "Meetings",
+        "meeting": "Meeting",
         "all_meetings": "All meetings",
         "add_meeting": "Add a meeting",
         "new_meeting": "New meeting",

@@ -19,6 +19,7 @@ angular.module('eventualizrApp.services').factory('i18n', function($rootScope, n
 
     function setLanguage(language) {
         loadResourceBundle(language);
+        $rootScope.language = language;
     };
 
     function loadResourceBundle(language){
@@ -30,6 +31,7 @@ angular.module('eventualizrApp.services').factory('i18n', function($rootScope, n
     }
 
     loadResourceBundle(ngI18nConfig.defaultLocale);
+    $rootScope.language = ngI18nConfig.defaultLocale;
 
     return {
         languages: ngI18nConfig.supportedLocales,
