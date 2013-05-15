@@ -2,6 +2,7 @@
     "language" : "Taal",
     "home" : "Home",
     "meeting": {
+        "coming_soon": "Binnenkort",
         "meetings": "Vergaderingen",
         "meeting": "Vergadering",
         "all_meetings": "Alle vergaderingen",

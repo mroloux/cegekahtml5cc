@@ -2,6 +2,7 @@
     "language": "Language",
     "home": "Home",
     "meeting": {
+        "coming_soon": "Coming soon",
         "meetings": "Meetings",
         "meeting": "Meeting",
         "all_meetings": "All meetings",
