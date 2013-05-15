@@ -21,7 +21,8 @@
         "start": "start",
         "end": "eind",
         "summary": "omschrijving",
-        "objective": "doel"
+        "objective": "doel",
+        "time":"uur"
     },
     "date_time": {
         "date": "Datum",
@@ -34,6 +35,7 @@
     },
     "common": {
         "search" : "Zoeken",
-        "sort": "Sorteren"
+        "sort": "Sorteren",
+        "back": "terug"
     }
 }

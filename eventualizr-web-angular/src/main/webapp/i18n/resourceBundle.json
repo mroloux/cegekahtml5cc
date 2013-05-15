@@ -21,7 +21,8 @@
         "start": "start",
         "end": "end",
         "summary": "summary",
-        "objective": "objective"
+        "objective": "objective",
+        "time":"time"
     },
     "date_time": {
         "date": "Date",
@@ -34,6 +35,7 @@
     },
     "common": {
         "search" : "Search",
-        "sort": "Sort"
+        "sort": "Sort",
+        "back": "back"
     }
 }
