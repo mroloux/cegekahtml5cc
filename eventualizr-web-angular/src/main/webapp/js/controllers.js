@@ -2,6 +2,12 @@
 
 /* Controllers */
 
+function createDateFromDateTimePickers(datum){
+	datum.date.setHours(datum.time.split(':')[0]);
+	datum.date.setMinutes(datum.time.split(':')[1]);
+	return datum.date.toJSON().replace('Z','');
+}
+
 function MeetingListController($scope, Meeting) {
 	$scope.resetNewMeeting = function() {
     	$scope.newMeeting = new Meeting();
@@ -24,14 +30,9 @@ function MeetingListController($scope, Meeting) {
     		$scope.meetings = Meeting.query();
     		$scope.resetNewMeeting();
         }, function(data) {
-            console.log(data);               
+        	$scope.foutmeldingen = [{type:'error', title:'Error', content:"Something went wrong... Please try again."}];               
         });
     };
-    function createDateFromDateTimePickers(datum){
-    	datum.date.setHours(datum.time.split(':')[0]);
-    	datum.date.setMinutes(datum.time.split(':')[1]);
-    	return datum.date.toJSON().replace('Z','');
-    }
 }
 MeetingListController.$inject = ['$scope', 'Meeting'];
 
@@ -46,6 +47,32 @@ function MeetingDetailController($scope, $routeParams, $location, Meeting, Talk)
     		$location.path('/meetings');
     	});
     };
+    
+    
+    $scope.resetNewTalk = function() {
+    	$scope.newTalk = new Talk();
+    	$scope.startdate = new Object();
+    	$scope.startdate.date = null;
+    	$scope.startdate.time = "00:00";
+    	$scope.enddate = new Object();
+    	$scope.enddate.date = null;
+    	$scope.enddate.time = "00:00";
+    };
+    
+    $scope.resetNewTalk();
+    
+    $scope.update = function(newTalk, startdate, enddate) {
+    	newTalk.till = createDateFromDateTimePickers(startdate);
+    	newTalk.from = createDateFromDateTimePickers(enddate);
+    	newTalk.$save({meetingId: $scope.meeting.id}, function(data) {
+    		$scope.talks = Talk.query({meetingId: $scope.meeting.id});
+    		$scope.resetNewTalk();
+    		$scope.alerts = [{type:'success', title:'Talk was successfully saved', content:""}];
+        }, function(data) {
+        	$scope.alerts = [{type:'error', title:'Error', content:"Something went wrong... Please try again."}];               
+        });
+    };
+    
 }
 MeetingDetailController.$inject = ['$scope', '$routeParams', '$location', 'Meeting', 'Talk'];
 

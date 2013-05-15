@@ -1,3 +1,7 @@
+<div class="alerts">
+  <div class="alert fade" ng-repeat="alert in alerts" bs-alert="alert"></div>
+</div>
+
 <button type="button" class="btn pull-right" ng-click="remove(meeting)">
 	<i class="icon-trash"></i>
 </button>
@@ -5,6 +9,7 @@
 <ng-include src="'partials/meetingOverview.html'"></ng-include>
 
 <h3>Talks</h3>
+<button type="button" class="btn" bs-modal="'partials/createTalk.html'"><i class="icon-plus"></i> Add talk</button>
 <ul id="talks">
 	<li ng-repeat="talk in talks" class="roundedGreyBorder">
     	<div class="talkSubject">Subject: {{talk.subject}}</div>
