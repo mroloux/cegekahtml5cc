@@ -47,6 +47,16 @@ function MeetingDetailController($scope, $routeParams, $location, Meeting, Talk)
     		$location.path('/meetings');
     	});
     };
+
+    $scope.removeTalk = function(talk) {
+    	talk.$delete({
+    		meetingId:$scope.meeting.id,
+    		talkId:talk.id
+    		}, function() {
+    			$scope.talks = Talk.query({meetingId: $routeParams.meetingId});
+    		}
+    	);
+    };
     
     
     $scope.resetNewTalk = function() {

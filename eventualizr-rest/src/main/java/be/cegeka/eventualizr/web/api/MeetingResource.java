@@ -74,4 +74,9 @@ public class MeetingResource {
 		return meetingService.create(meetingId, newTalkTO);
 	}
 	
+	@DELETE @Path("{meetingid : \\d+}/talks/{talkid : \\d+}")
+	public boolean deleteTalk(@PathParam("meetingid") Long meetingid, @PathParam("talkid") Long talkid){
+		return meetingService.deleteTalk(meetingid, talkid);
+	}
+	
 }
