@@ -30,7 +30,10 @@
 				<td>{{talk.objective}}</td>
 				<td>{{talk.location}}</td>
 				<td>{{talk.from | date:'H:mm'}} - {{talk.till | date:'H:mm'}}</td>
-				<td><button type="button" class="btn" ng-click="removeTalk(talk)"><i class="icon-trash"></i></button></td>
+				<td>
+					<a href="#/meetings/{{meeting.id}}/talks/{{talk.id}}" class="btn"><i class="icon-search"></i></a>
+					<button type="button" class="btn" ng-click="removeTalk(talk)"><i class="icon-trash"></i></button>
+				</td>
 			</tr>
 		</tbody>
 	</table>

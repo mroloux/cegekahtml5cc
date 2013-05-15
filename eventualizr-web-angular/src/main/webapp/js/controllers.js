@@ -89,6 +89,11 @@ function MeetingDetailController($scope, $routeParams, $location, Meeting, Talk)
 }
 MeetingDetailController.$inject = ['$scope', '$routeParams', '$location', 'Meeting', 'Talk'];
 
+function TalkDetailController($scope, $routeParams, $location, Talk) {
+    $scope.talk = Talk.query({meetingId: $routeParams.meetingId, talkId: $routeParams.talkId});
+}
+TalkDetailController.$inject = ['$scope', '$routeParams', '$location', 'Talk'];
+
 /** translations */
 function AppController($scope, localize) {
     window.scope =  $scope;   // watch $scope in firebug
