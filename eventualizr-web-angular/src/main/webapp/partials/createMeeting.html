@@ -5,38 +5,10 @@
 		</div>
 		<div class="modal-body">
 			<form name="newMeetingForm" novalidate class="form-horizontal">
-				<div class="control-group">
-					<label class="control-label" for="title">Event</label>
-				    <div class="controls">
-				    	<input type="text" id="title" name="title" ng-model="newMeeting.title" placeholder="Event name" required>
-				    </div>
-				</div>
-				
-				<div class="control-group">
-					<label class="control-label" for="venue">Venue</label>
-				    <div class="controls">
-				    	<input type="text" id="venue" name="venue" ng-model="newMeeting.venue" placeholder="Venue" required>
-				    </div>
-				</div>
-				 
-				<div class="control-group">
-					<label class="control-label" for="starttime">Start time</label>
-				    <div class="controls">
-				    	<input type="text" id="starttime" name="starttime" ng-model="startdate.date" data-date-format="dd/mm/yyyy" bs-datepicker>
-	   				    <button type="button" class="btn" data-toggle="datepicker"><i class="icon-calendar"></i></button>
-				    	<input type="text" id="starttime" name="starttime" ng-model="startdate.time" bs-timepicker data-minute-step="10" data-show-seconds="false" data-show-meridian="false">
-	   				    <button type="button" class="btn" data-toggle="timepicker"><i class="icon-time"></i></button>
-				    </div>
-				</div>
-	
-				<div class="control-group">
-					<label class="control-label" for="endtime">End time</label>
-				    <div class="controls">
-				    	<input type="text" id="endtime" name="endtime" ng-model="enddate.date" data-date-format="dd/mm/yyyy" bs-datepicker>
-	   				    <button type="button" class="btn" data-toggle="datepicker"><i class="icon-calendar"></i></button>
-				    	<input type="text" id="endtime" name="endtime" ng-model="enddate.time" />
-				    </div>
-				</div>
+				<div inputcomponent guimodel="newMeeting.title" label="Event"></div>
+				<div inputcomponent guimodel="newMeeting.venue" label="Venue"></div>
+				<div datetimecomponent guimodel="startdate" label="Start time"></div>
+				<div datetimecomponent guimodel="enddate" label="End time"></div>
 			</form>
 		</div>
 			
