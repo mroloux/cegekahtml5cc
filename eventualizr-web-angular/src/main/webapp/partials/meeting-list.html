@@ -8,6 +8,7 @@ Sort:
 	<option value="start">Date</option>
 	<option value="title">Meeting</option>
 </select>
+
 <ul id="meetings">
 	<li ng-repeat="meeting in meetings | filter:query | orderBy:orderProp" class="roundedGreyBorder flashyBackground">
 		<a href="#/meetings/{{meeting.id}}" class="fullyClickableLink">
@@ -15,5 +16,3 @@ Sort:
   		</a>
 	</li>
 </ul>
-
-
