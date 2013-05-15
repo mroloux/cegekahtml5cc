@@ -7,6 +7,7 @@ angular.module('eventualizrApp', ['ngResource', 'eventualizrApp.filters', 'event
         $routeProvider.when('/home', {templateUrl: 'partials/home.html', controller: MeetingListController});
         $routeProvider.when('/meetings', {templateUrl: 'partials/meeting-list.html', controller: MeetingListController});
         $routeProvider.when('/meetings/:meetingId', {templateUrl: 'partials/meeting-detail.html', controller: MeetingDetailController});
+	$routeProvider.when('/meetings/:meetingId/talks/:talkId', {templateUrl: 'partials/talk-detail.html', controller: TalkDetailController});
         $routeProvider.otherwise({redirectTo: '/home'});
     }])
     .value('ngI18nConfig', {

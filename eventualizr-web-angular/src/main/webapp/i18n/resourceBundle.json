@@ -13,6 +13,15 @@
         "venue": "Venue"
 
     },
+    "talk": {
+        "speaker": "speaker",
+        "subject": "subject",
+        "location": "location",
+        "start": "start",
+        "end": "end",
+        "summary": "summary",
+        "objective": "objective"
+    },
     "date_time": {
         "date": "Date",
         "start_time": "Start",
