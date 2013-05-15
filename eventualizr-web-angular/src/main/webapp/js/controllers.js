@@ -40,24 +40,6 @@ MeetingListController.$inject = ['$scope', 'Meeting'];
 function MeetingDetailController($scope, $routeParams, $location, Meeting, Talk) {
     $scope.talks = Talk.query({meetingId: $routeParams.meetingId});
     $scope.meeting = Meeting.get({meetingId: $routeParams.meetingId});
-   
-    $scope.remove = function(meeting) {
-    	meeting.$delete({meetingId:meeting.id}, function() {
-    		$scope.meetings = Meeting.query();
-    		$location.path('/meetings');
-    	});
-    };
-
-    $scope.removeTalk = function(talk) {
-    	talk.$delete({
-    		meetingId:$scope.meeting.id,
-    		talkId:talk.id
-    		}, function() {
-    			$scope.talks = Talk.query({meetingId: $routeParams.meetingId});
-    		}
-    	);
-    };
-    
     
     $scope.resetNewTalk = function() {
     	$scope.newTalk = new Talk();
@@ -81,6 +63,27 @@ function MeetingDetailController($scope, $routeParams, $location, Meeting, Talk)
         }, function(data) {
         	$scope.alerts = [{type:'error', title:'Error', content:"Something went wrong... Please try again."}];               
         });
+    };
+    
+    $scope.remove = function(meeting) {
+    	meeting.$delete({meetingId:meeting.id}, function() {
+    		$scope.meetings = Meeting.query();
+    		$location.path('/meetings');
+    	}, function(){
+			$scope.alerts = [{type:'error', title:'Meeting could not be deleted', content:""}];
+    	});
+    };
+
+    $scope.removeTalk = function(talk) {
+    	talk.$delete({
+    		meetingId:$scope.meeting.id,
+    		talkId:talk.id
+    		}, function() {
+    			$scope.talks = Talk.query({meetingId: $routeParams.meetingId});
+    			$scope.alerts = [{type:'success', title:'Talk was successfully deleted', content:""}];
+    		}, function(){
+    			$scope.alerts = [{type:'error', title:'Talk could not be deleted', content:""}];
+        	});
     };
     
 }

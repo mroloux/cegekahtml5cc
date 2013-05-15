@@ -8,32 +8,30 @@
 
 <ng-include src="'partials/meetingOverview.html'"></ng-include>
 
-<h3>Talks</h3>
-<button type="button" class="btn" bs-modal="'partials/createTalk.html'"><i class="icon-plus"></i> Add talk</button>
-
-<table class="table table-striped">
-	<thead>
-		<tr>
-			<th>Subject</th>
-			<th>Speaker</th>
-			<th>Objective</th>
-			<th>Location</th>
-			<th>Time</th>
-			<th></th>
-		</tr>
-	</thead>
-	<tbody>
-		<tr ng-repeat="talk in talks">
-			<td>{{talk.subject}}</td>
-			<td>{{talk.speaker}}</td>
-			<td>{{talk.objective}}</td>
-			<td>{{talk.location}}</td>
-			<td>{{talk.from | date:'H:mm'}} - {{talk.till | date:'H:mm'}}</td>
-			<td>
-				<button type="button" class="btn pull-right" ng-click="removeTalk(talk)">
-					<i class="icon-trash"></i>
-				</button>
-			</td>
-		</tr>
-	</tbody>
-</table>
+<div>
+	<table class="table table-striped">
+		<thead>
+			<tr>
+				<th>Subject</th>
+				<th>Speaker</th>
+				<th>Objective</th>
+				<th>Location</th>
+				<th>Time</th>
+				<th style="width:10%"><button type="button" class="btn" bs-modal="'partials/createTalk.html'"><i class="icon-plus"></i> Add talk</button></th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-show="talks.length == 0">
+				<td colspan="6">There are currently no talks available for this meeting.</td>
+			</tr>
+			<tr ng-repeat="talk in talks">
+				<td>{{talk.subject}}</td>
+				<td>{{talk.speaker}}</td>
+				<td>{{talk.objective}}</td>
+				<td>{{talk.location}}</td>
+				<td>{{talk.from | date:'H:mm'}} - {{talk.till | date:'H:mm'}}</td>
+				<td><button type="button" class="btn" ng-click="removeTalk(talk)"><i class="icon-trash"></i></button></td>
+			</tr>
+		</tbody>
+	</table>
+</div>
