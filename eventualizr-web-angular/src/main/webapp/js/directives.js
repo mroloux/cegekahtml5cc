@@ -20,6 +20,16 @@ angular.module('eventualizrApp.directives', [])
 			}
 		};
 	})
+	.directive('textareacomponent', function factory() {
+		return {
+			templateUrl : 'partials/components/textareacomponent.html',
+			restrict : 'A',
+			scope : {
+				label:"@",
+				guimodel:"="
+			}
+		};
+	})
 	.directive('datetimecomponent', function factory() {
 		return {
 			templateUrl : 'partials/components/datetimecomponent.html',
