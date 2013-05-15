@@ -3,7 +3,10 @@
     "home" : "Home",
     "meeting": {
         "meetings": "Vergaderingen",
-        "add_meeting": "Meeting toevoegen",
+        "meeting": "Vergadering",
+        "all_meetings": "Alle vergaderingen",
+        "add_meeting": "Vergadering toevoegen",
+        "new_meeting": "Nieuwe vergadering",
         "event": "Evenement",
         "event_name": "Naam evenement",
         "venue": "Plaats"
@@ -19,11 +22,16 @@
         "objective": "doel"
     },
     "date_time": {
+        "date": "Datum",
         "start_time": "Start",
         "end_time": "Einde"
     },
     "buttons": {
         "save": "Bewaren",
         "cancel": "Annuleren"
+    },
+    "common": {
+        "search" : "Zoeken",
+        "sort": "Sorteren"
     }
 }

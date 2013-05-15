@@ -112,7 +112,10 @@ function AppController($scope, i18n, $strapConfig, $location) {
         i18n.setLanguage(lang);
         $event.preventDefault();
         $strapConfig.datepicker.language = lang;
-        $location.path($location.path());
+    };
+
+    $scope.isLanguage = function(lang) {
+        return $scope.language == lang;
     };
 
     $scope.languages = i18n.languages;

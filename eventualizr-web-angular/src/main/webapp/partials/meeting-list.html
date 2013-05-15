@@ -2,15 +2,15 @@
   <div class="alert fade" ng-repeat="alert in foutmeldingen" bs-alert="alert"></div>
 </div>
 
-<h3>All meetings</h3>
-<button type="button" class="btn pull-right newMeetingElements" ng-click="modalCreateMeeting()"><i class="icon-plus"></i> New meeting</button>
-Search:
+<h3>{{resourceBundle.meeting.all_meetings}}</h3>
+<button type="button" class="btn pull-right newMeetingElements" ng-click="modalCreateMeeting()"><i class="icon-plus"></i> {{resourceBundle.meeting.new_meeting}}</button>
+{{resourceBundle.common.search}}:
 <input type="text" ng-model="query">
 
-Sort:
+{{resourceBundle.common.sort}}:
 <select ng-model="orderProp">
-	<option value="start">Date</option>
-	<option value="title">Meeting</option>
+	<option value="start">{{resourceBundle.date_time.date}}</option>
+	<option value="title">{{resourceBundle.meeting.meeting}}</option>
 </select>
 
 <ul id="meetings">
