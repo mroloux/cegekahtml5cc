@@ -2,30 +2,25 @@
 
 /* jasmine specs for controllers go here */
 
-describe('MyCtrl1', function(){
-  var myCtrl1;
+describe('MeetingListController', function(){
+  var scope;
+  var meeting;
+  beforeEach(angular.mock.module('eventualizrApp'));
 
-  beforeEach(function(){
-    myCtrl1 = new MyCtrl1();
-  });
+  beforeEach(angular.mock.inject(function($rootScope, $controller) {
+    meeting = {
+      query: jasmine.createSpy('query')
+    };
+    scope = $rootScope.$new();
+    
 
-
-  it('should ....', function() {
-    //spec body
-  });
-});
-
-
-describe('MyCtrl2', function(){
-  var myCtrl2;
-
-
-  beforeEach(function(){
-    myCtrl2 = new MyCtrl2();
-  });
-
+    $controller(MeetingListController, {
+      $scope: scope,
+      Meeting: meeting
+    });
+  }));
 
   it('should ....', function() {
-    //spec body
+    console.log("it works???");
   });
 });
