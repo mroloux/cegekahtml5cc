@@ -1,3 +1,3 @@
-	<span class="meetingTitle">{{meeting.title}}</span><br> 
-	Venue: {{meeting.venue}}<br> 
-	Date: {{meeting.start | date:'dd/MM/yyyy H:mm'}} - {{meeting.end | date:'dd/MM/yyyy H:mm'}}
+	<span class="meetingTitle">{{meeting.title}}</span><br>
+    {{resourceBundle.meeting.venue}}: {{meeting.venue}}<br>
+    {{resourceBundle.date_time.date}}: {{meeting.start | date:'dd/MM/yyyy H:mm'}} - {{meeting.end | date:'dd/MM/yyyy H:mm'}}

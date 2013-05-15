@@ -3,18 +3,25 @@
     "home": "Home",
     "meeting": {
         "meetings": "Meetings",
+        "all_meetings": "All meetings",
         "add_meeting": "Add a meeting",
+        "new_meeting": "New meeting",
         "event": "Event",
         "event_name": "Event name",
         "venue": "Venue"
 
     },
     "date_time": {
+        "date": "Date",
         "start_time": "Start",
         "end_time": "End"
     },
     "buttons": {
         "save": "Save",
         "cancel": "Cancel"
+    },
+    "common": {
+        "search" : "Search",
+        "sort": "Sort"
     }
 }
