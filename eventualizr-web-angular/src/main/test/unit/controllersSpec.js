@@ -20,7 +20,4 @@ describe('MeetingListController', function(){
     });
   }));
 
-//  it('should ....', function() {
-//    console.log("it works???");
-//  });
 });

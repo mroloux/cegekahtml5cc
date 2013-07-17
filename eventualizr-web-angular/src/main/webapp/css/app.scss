@@ -1,0 +1,66 @@
+$linkColor: #6E8DC2;
+$linkActiveColor: #5564A5;
+
+body {
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
+  	padding-top: 60px;
+}
+
+a {
+	&:hover,&:visited,&:active { 
+		text-decoration: underline; 
+		color: $linkActiveColor;
+	}
+	&:link {
+		color: $linkColor;
+		text-decoration: none;
+	}
+}
+
+form, .form-actions {
+	margin-bottom: 0;
+}
+
+.roundedGreyBorder {
+	border: 1px solid #dcdcdc;
+	border-radius: 4px;
+	padding: 5px;
+}
+
+.flashyBackground {
+	background-color: #e6e6fa;
+}
+
+#meetings li,#talks li {
+	margin: 5px;
+}
+
+#meetings,#talks {
+	list-style-type: none;
+}
+
+.meetingTitle {
+	font-size: 1.2em;
+}
+
+.fullyClickableLink {
+	display: block;
+	width: 100%;
+}
+
+.inputForm {
+	background-color: #f5f5f5;
+	margin: 5px;
+}
+
+.inheritWidth {
+	width: inherit;
+}
+
+.modal-body {
+	max-height: 500px;
+}
+
+.capitalize{
+	text-transform: capitalize;
+}
