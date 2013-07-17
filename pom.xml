@@ -4,9 +4,6 @@
 	<groupId>be.cegeka.eventualizr</groupId>
 	<artifactId>eventualizr</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-    <modules>
-        <module>eventualizr-android</module>
-    </modules>
     <packaging>pom</packaging>
 	<name>Eventualizr parent</name>
 	<properties>
@@ -367,6 +364,11 @@
 		<finalName>${project.artifactId}</finalName>
 		<pluginManagement>
 			<plugins>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>1.2.1</version>
+                </plugin>
 				<plugin>
 					<artifactId>maven-compiler-plugin</artifactId>
 					<version>2.3.2</version>

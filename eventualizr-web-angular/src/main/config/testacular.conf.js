@@ -14,6 +14,12 @@ files = [
 
 autoWatch = true;
 
+// web server port
+port = 8080;
+
+// cli runner port
+runnerPort = 9100;
+
 browsers = ['Chrome'];
 
 junitReporter = {

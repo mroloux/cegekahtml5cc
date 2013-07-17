@@ -40,28 +40,28 @@ public class MeetingService {
 			}
 		});
 	};
-	
+
+    @Transactional(readOnly=true)
+    public TalkTO getTalk(Long meetingId, Long talkId) {
+        Meeting meeting = meetingRepository.findOne(meetingId);
+        Talk talk = meeting.getTalk(talkId);
+        return meetingMapper.toTO(talk);
+    }
+
 	public MeetingTO update(MeetingTO meetingTO){
 		Meeting meeting = meetingRepository.findOne(meetingTO.getId());
 		meetingMapper.mergeEntity(meeting, meetingTO);
 		return meetingMapper.toTO(meetingRepository.save(meeting));
 	}
-	
+
 	public MeetingTO create(MeetingTO meetingTO){
 		Meeting meeting = meetingMapper.toEntity(meetingTO);
 		return meetingMapper.toTO(meetingRepository.save(meeting));
 	}
-	
+
 	public boolean delete(Long id) {
 		meetingRepository.delete(id);
 		return meetingRepository.findOne(id) == null;
-	}
-	
-	@Transactional(readOnly=true)
-	public TalkTO getTalk(Long meetingId, Long talkId) {
-		Meeting meeting = meetingRepository.findOne(meetingId);
-		Talk talk = meeting.getTalk(talkId);
-		return meetingMapper.toTO(talk);
 	}
 	
 	@Transactional(readOnly=true)

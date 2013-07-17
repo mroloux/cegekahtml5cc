@@ -4,6 +4,7 @@
 .project
 .idea
 target/
+test_out/
 *.iml
 classes
 .DS_Store
