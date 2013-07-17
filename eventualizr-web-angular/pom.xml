@@ -7,11 +7,30 @@
 		<groupId>be.cegeka.eventualizr</groupId>
 		<version>0.0.1-SNAPSHOT</version>
 	</parent>
-
 	<artifactId>eventualizr-web-angular</artifactId>
 	<packaging>war</packaging>
 	<name>Eventualizr web angular</name>
 
+	<profiles>
+	    <profile>
+	        <id>windows</id>
+	        <activation>
+	            <activeByDefault>true</activeByDefault>
+	        </activation>
+	        <properties>
+	            <angular.test.script>${basedir}/src/main/scripts/test.bat</angular.test.script>
+	            <angular.e2e.script>${basedir}/src/main/scripts/e2e-test.bat</angular.e2e.script>
+	        </properties>
+	    </profile>
+	    <profile>
+	        <id>unix</id>
+	        <properties>
+	            <angular.test.script>${basedir}/src/main/scripts/test.sh</angular.test.script>
+	            <angular.e2e.script>${basedir}/src/main/scripts/e2e-test.sh</angular.e2e.script>
+	        </properties>
+	    </profile>
+	</profiles>
+	
 	<dependencies>
 		<dependency>
 			<groupId>be.cegeka.eventualizr</groupId>
@@ -47,7 +66,7 @@
                             <goal>exec</goal>
                         </goals>
                         <configuration>
-                            <executable>${basedir}/src/main/scripts/test.bat</executable>
+                            <executable>${angular.test.script}</executable>
                         </configuration>
                     </execution>
                     <execution>
@@ -57,7 +76,7 @@
                             <goal>exec</goal>
                         </goals>
                         <configuration>
-                            <executable>${basedir}/src/main/scripts/e2e-test.bat</executable>
+                            <executable>${angular.e2e.script}</executable>
                         </configuration>
                     </execution>
                 </executions>
